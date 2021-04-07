@@ -1,0 +1,29 @@
+const LmNode = require("../model/LmNode")
+module.exports = function analysis(node) {
+    if (node.StrList.length === 0) {
+        return false
+    }
+    let line = node.StrList[0].trim();
+    let reg = /\s*#+ /
+    if (!reg.test(line)) {
+        return false;
+    }
+
+    reg = /(\s*#+ )([\w\W]*)/
+    let exec = reg.exec(line);
+
+    let head = exec[1];
+    let data = exec[2];
+
+    let lmNode = new LmNode();
+    lmNode.code = "html-h"
+    lmNode.map["num"] = head.length - 1
+    lmNode.setData(data)
+
+
+    //结束处理
+    node.NodeList.push(lmNode)
+    node.StrList.shift()
+    return true;
+}
+

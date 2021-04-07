@@ -1,0 +1,20 @@
+{
+  "name": "lram",
+  "version": "0.0.1",
+  "description": "lontten markdown js",
+  "main": "index_bak.js",
+  "scripts": {
+    "start": "node index_bak.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "npm publish"
+  },
+  "keywords": [
+    "lontten",
+    "markdown"
+  ],
+  "author": "lontten",
+  "license": "ISC",
+  "devDependencies": {
+    "katex": "^0.12.0"
+  }
+}
