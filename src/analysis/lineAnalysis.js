@@ -23,6 +23,10 @@ module.exports = function analysis(node) {
     if (node.StrList.length === 0) {
         return false
     }
+
+    console.log('line ana')
+    console.log(node)
+
     let line = node.StrList[0].trim();
     let reg = /\s*#+ /
     if (!reg.test(line)) {

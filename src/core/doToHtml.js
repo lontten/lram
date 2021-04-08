@@ -1,30 +1,79 @@
 let LmNode = require("../model/LmNode");
-module.exports= function doToHtml (v) {
-    var html=''
-    for (let node in v) {
-
-    }
-    return ""
+let line = require("../render/lineRender");
+let code = require("../render/codeRender");
+let text = require("../render/textRender");
+module.exports = function doToHtml(node) {
+    toHtmlCore(node.NodeList)
+    return html
 }
 
-var html=''
+let html = '';
 
 function toHtmlCore(nodeList) {
     nodeList.forEach(node => {
+        if (node.code === "html-h") {
+            let b = line(node);
 
-    })
+            let head = b.head;
+            let end = b.end;
+            let data = b.data;
 
-    if (v.code==='html'){
-        nodeList=v.NodeList
-    }else {
-        nodeList=v
-    }
-
-    nodeList = analysis.doTextAnalysis(node, analysisFunList);
-    nodeList.forEach(node => {
-        if (node.NodeList.length>0){
-            toHtmlCore(node.NodeList)
+            if (head !== undefined) {
+                html += head
+            }
+            if (data !== undefined) {
+                html += data
+            } else {
+                toHtmlCore(node.NodeList)
+            }
+            if (end !== undefined) {
+                html += end
+            }
         }
+        if (node.code === "code") {
+            let b = code(node);
+
+            let head = b.head;
+            let end = b.end;
+            let data = b.data;
+
+            if (head !== undefined) {
+                html += head
+            }
+            if (data !== undefined) {
+                html += data
+            } else {
+                toHtmlCore(node.NodeList)
+            }
+            if (end !== undefined) {
+                html += end
+            }
+        }
+
+          if (node.code === "text") {
+            let b = text(node);
+
+            let head = b.head;
+            let end = b.end;
+            let data = b.data;
+
+            if (head !== undefined) {
+                html += head
+            }
+            if (data !== undefined) {
+                html += data
+            } else {
+                toHtmlCore(node.NodeList)
+            }
+            if (end !== undefined) {
+                html += end
+            }
+        }
+
+
+
+
     })
+
 }
 

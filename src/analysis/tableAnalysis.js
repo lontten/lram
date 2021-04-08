@@ -5,7 +5,7 @@ module.exports= function analysis (node) {
         case "text":
         case "code":
         case "math":
-            return false
+            return 0
     }
 
     let line = node.StrList[0].trim();

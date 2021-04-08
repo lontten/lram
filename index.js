@@ -12,14 +12,9 @@ aFunList[2] = math
 
 
 function analysisTextCore(node) {
-    console.log("node")
-    console.log(node)
     let nodeList = analysis(node, aFunList);
-    console.log(nodeList)
     nodeList.forEach(value => {
-        console.log("value")
-        console.log(value)
-        if (value.StrList.length > 0) {
+        if (value.code!=="text" && value.StrList.length > 0) {
             analysisTextCore(value)
         }
     })
@@ -33,8 +28,9 @@ module.exports.toHtml = function (data) {
     node.setData(data)
 
     analysisTextCore(node)
-    console.log('---------ssss----------')
+    console.log('tohtml---------------------')
     console.log(JSON.stringify(node))
+
 
 
     return toHtml(node)

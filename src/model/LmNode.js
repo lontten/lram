@@ -3,6 +3,7 @@ module.exports = class LmNode {
 
     constructor() {
         this.code = ""
+        this.data = ""
     }
 
     //解析类型

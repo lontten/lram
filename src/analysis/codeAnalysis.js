@@ -18,6 +18,12 @@ module.exports = function analysis(node) {
         case "math":
             return false
     }
+
+    if (node.StrList.length === 0) {
+        return false
+    }
+
+
     console.log("code ana")
     console.log(node)
     let line = node.StrList[0].trim();
@@ -33,25 +39,31 @@ module.exports = function analysis(node) {
     let exec = reg.exec(line);
 
 
-    lmNode.type = exec[1]
+    lmNode.code='code'
+    lmNode.map["type"] = exec[1]
     while (true) {
         node.StrList.shift()
 
-        const tmpstr = node.StrList[0].trim();
-        if (tmpstr == null) {
+        const line = node.StrList[0].trim();
+        if (line === undefined) {
             break;
         }
 
-        if (tmpstr.trim() === "```") {
+        if (line.trim() === "```") {
             break;
         }
-        lmNode.data += tmpstr;
-        lmNode.StrList.push(tmpstr)
+        lmNode.data += line;
+        lmNode.StrList.push(line)
+
+
+
     }
+
 
     node.NodeList.push(lmNode)
 
     //结束处理
     node.StrList.shift()
+
     return true;
 }

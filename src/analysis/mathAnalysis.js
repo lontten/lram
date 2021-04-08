@@ -12,6 +12,8 @@ module.exports = function analysis(node) {
     if (node.StrList.length === 0) {
         return false
     }
+    console.log('math ana')
+    console.log(node)
 
     let line = node.StrList[0].trim();
     if (line !== "$$") {
