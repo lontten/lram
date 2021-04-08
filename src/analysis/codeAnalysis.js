@@ -1,6 +1,23 @@
 let LmNode = require("../model/LmNode");
-
+/**
+ *
+ *      ```java
+ *      public void hello(){
+ *
+ *      }
+ *      ```
+ *
+ *
+ * @param node
+ * @returns {boolean}
+ */
 module.exports = function analysis(node) {
+    switch (node.code) {
+        case "code":
+        case "math":
+            return false
+    }
+
     let line = node.StrList[0].trim();
     let reg = /^\s*```/
     if (!reg.test(line)) {

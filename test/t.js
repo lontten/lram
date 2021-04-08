@@ -1,8 +1,16 @@
 const LmNode = require("../src/model/LmNode");
 
 let node = new LmNode();
-node.data="hello"
+node.data = "hello"
 console.log(node)
+f()
 
-StrList = data.trim().split('\n')
-console.log(StrList)
+function f() {
+    switch ("code") {
+        case "html-h":
+        case "code":
+        case "math":
+            return false
+    }
+    console.log("f")
+}

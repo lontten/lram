@@ -1,10 +1,16 @@
-let MdNode = require("../model/LmNode");
+let LmNode = require("../model/LmNode");
 
-module.exports= function analysis (v) {
-    let tmp = v.MdBaseStrings[v.MdBaseStrings.length - 1].trim();
+module.exports= function analysis (node) {
+    switch (node.code) {
+        case "code":
+        case "math":
+            return false
+    }
+
+    let line = node.StrList[0].trim();
 
     let reg = /^\|([\s\S]*\|)+\s*$/;
-    if (!reg.test(tmp)) {
+    if (!reg.test(line)) {
         return false
     }
 

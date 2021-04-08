@@ -1,5 +1,24 @@
 const LmNode = require("../model/LmNode")
+/**
+ *
+ *      # h1
+ *      ## h2
+ *      ### h3
+ *      #### h4
+ *      ##### h5
+ *      ###### h6
+ *
+ * @param node
+ * @returns {boolean}
+ */
 module.exports = function analysis(node) {
+    switch (node.code) {
+        case "html-h":
+        case "code":
+        case "math":
+            return false
+    }
+
     if (node.StrList.length === 0) {
         return false
     }
