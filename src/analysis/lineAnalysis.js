@@ -14,6 +14,7 @@ const LmNode = require("../model/LmNode")
 module.exports = function analysis(node) {
     switch (node.code) {
         case "html-h":
+        case "text":
         case "code":
         case "math":
             return false

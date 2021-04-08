@@ -13,11 +13,13 @@ let LmNode = require("../model/LmNode");
  */
 module.exports = function analysis(node) {
     switch (node.code) {
+        case "text":
         case "code":
         case "math":
             return false
     }
-
+    console.log("code ana")
+    console.log(node)
     let line = node.StrList[0].trim();
     let reg = /^\s*```/
     if (!reg.test(line)) {

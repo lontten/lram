@@ -1,3 +1,5 @@
+let text = require("../analysis/text");
+
 module.exports = function doTextAnalysis(node, funList) {
     while (true) {
         let flag = false;
@@ -10,6 +12,7 @@ module.exports = function doTextAnalysis(node, funList) {
         }
 
         if (!flag) {
+            text(node)
             return node.NodeList
         }
     }

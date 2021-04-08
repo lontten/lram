@@ -1,9 +1,21 @@
 let LmNode = require("../model/LmNode");
 
 module.exports = function analysis(node) {
+    switch (node.code) {
+        case "html-h":
+        case "text":
+        case "code":
+        case "math":
+            return false
+    }
+
+    if (node.StrList.length === 0) {
+        return false
+    }
+
     let line = node.StrList[0].trim();
     if (line !== "$$") {
-        return 0;
+        return false;
     }
 
     let lmNode = new LmNode();
@@ -11,16 +23,16 @@ module.exports = function analysis(node) {
     while (true) {
         node.StrList.shift()
 
-        const tmpstr = node.StrList[0].trim();
-        if (tmpstr == null) {
+        const tmp = node.StrList[0].trim();
+        if (tmp == null) {
             break;
         }
 
-        if (tmpstr.trim() === "$$") {
+        if (tmp.trim() === "$$") {
             break;
         }
-        lmNode.data += tmpstr;
-        lmNode.StrList.push(tmpstr)
+        lmNode.data += tmp;
+        lmNode.StrList.push(tmp)
     }
 
     node.NodeList.push(lmNode)
