@@ -44,10 +44,10 @@ module.exports = function analysis(node) {
     while (true) {
         node.StrList.shift()
 
-        const line = node.StrList[0].trim();
-        if (line === undefined) {
-            break;
+        if (node.StrList.length === 0) {
+            break
         }
+        const line = node.StrList[0].trim();
 
         if (line.trim() === "```") {
             break;

@@ -25,16 +25,16 @@ module.exports = function analysis(node) {
     while (true) {
         node.StrList.shift()
 
-        const tmp = node.StrList[0].trim();
-        if (tmp == null) {
-            break;
+        if (node.StrList.length === 0) {
+            break
         }
+        const line = node.StrList[0].trim();
 
-        if (tmp.trim() === "$$") {
+        if (line.trim() === "$$") {
             break;
         }
-        lmNode.data += tmp;
-        lmNode.StrList.push(tmp)
+        lmNode.data += line;
+        lmNode.StrList.push(line)
     }
 
     node.NodeList.push(lmNode)
