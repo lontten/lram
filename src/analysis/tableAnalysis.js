@@ -5,12 +5,16 @@ module.exports= function analysis (node) {
         case "text":
         case "code":
         case "math":
-            return 0
+            return false
     }
 
-    let line = node.StrList[0].trim();
+    if (node.StrList.length === 0) {
+        return false
+    }
 
-    let reg = /^\|([\s\S]*\|)+\s*$/;
+    let line = node.StrList[0]
+
+    let reg = /^\|([\s\S]*\|)+[\s\S]*$/;
     if (!reg.test(line)) {
         return false
     }

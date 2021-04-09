@@ -1,6 +1,6 @@
 let LmNode = require("./src/model/LmNode");
 let analysis = require("./src/core/doTextAnalysis");
-let toHtml = require("./src/core/doToHtml");
+let toHtml = require("./src/core/render");
 let line = require("./src/analysis/lineAnalysis");
 let code = require("./src/analysis/codeAnalysis");
 let math = require("./src/analysis/mathAnalysis");
@@ -21,7 +21,7 @@ function analysisTextCore(node) {
 }
 
 
-module.exports.toHtml = function (data) {
+module.exports.render = function (data) {
     let node = new LmNode()
 
     node.code = "html"

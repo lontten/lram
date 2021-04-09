@@ -6,7 +6,7 @@ module.exports = function render(node) {
     const highlightedCode = hljs.highlightAuto(node.data).value
 
     return {
-        data: highlightedCode,
+        data: '<pre><code class="hljs">'+highlightedCode+'</code></pre>',
     }
 }
 

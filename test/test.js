@@ -1,15 +1,12 @@
 let mb = require("../index");
 var t=`
-# #  #  #  这是一个标题
-skjfa
-aaaaaa
-
-\`\`\`java
-    public void hello(){
-
+    \`\`\`
+public void hello(){
+int i=2;
 }
-\`\`\`
- `
-let s = mb.toHtml(t);
+    \`\`\`
+    
+    `
+let s = mb.render(t);
 console.log("ssss-------------html-----")
 console.log(s)

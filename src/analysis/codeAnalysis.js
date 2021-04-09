@@ -26,7 +26,7 @@ module.exports = function analysis(node) {
 
     console.log("code ana")
     console.log(node)
-    let line = node.StrList[0].trim();
+    let line = node.StrList[0]
     let reg = /^\s*```/
     if (!reg.test(line)) {
         return false;
@@ -47,15 +47,18 @@ module.exports = function analysis(node) {
         if (node.StrList.length === 0) {
             break
         }
-        const line = node.StrList[0].trim();
+        const line = node.StrList[0]
+        console.log("line==============================================")
+        console.log(line)
 
         if (line.trim() === "```") {
             break;
         }
-        lmNode.data += line;
+        lmNode.data = lmNode.data+ line+'\n';
         lmNode.StrList.push(line)
 
-
+        console.log("line==============================================")
+        console.log(lmNode.data)
 
     }
 
