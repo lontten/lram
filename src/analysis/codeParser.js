@@ -11,7 +11,7 @@ let LmNode = require("../model/LmNode");
  * @param node
  * @returns {boolean}
  */
-module.exports = function analysis(node) {
+module.exports = function parser(node) {
     switch (node.code) {
         case "text":
         case "code":

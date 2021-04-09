@@ -1,6 +1,7 @@
 let LmNode = require("../model/LmNode");
+let text = require("../analysis/text");
 
-module.exports= function analysis (node) {
+module.exports = function parser(node) {
     switch (node.code) {
         case "text":
         case "code":
@@ -20,32 +21,29 @@ module.exports= function analysis (node) {
     }
 
     //匹配table 第一行 成功
-    reg = "[\\s\\S]*?\\|";
+    reg = /[\s\S]*?\|/g
+    let oneLineHeadDatalist = line.split('|');
+    oneLineHeadDatalist.shift()
+    const oneLineNum = oneLineHeadDatalist.length
 
-    var mcs = Regex.Matches(MdBaseData.line, expr);
-    var oneLineNum = mcs.Count - 1;
+    let twoLine = node.StrList[1]
 
-    List < string > oneLineHeadDatalist = new List < string > ();
-    for (var i1 = 1; i1 < mcs.Count; i1++) {
-        oneLineHeadDatalist.Add(mcs[i1].Value);
-    }
+    reg =  /^\|((\s*-\s*|\s*-:\s*|\s*:-\s*)\|)+\s*$/
 
-    var tmpLine = MdBaseData.line;
-    MdBaseData.line = MdBaseData.sr.ReadLine();
-    expr = "^\\|((\\s*-\\s*|\\s*-:\\s*|\\s*:-\\s*)\\|)+\\s*$";
     //第二行匹配table，失败
-    if (!Regex.Match(MdBaseData.line, expr).Success) {
+    if (!reg.test(twoLine)) {
         //无法匹配table模式，第一行直接显示,
         //line为第二行内容，向下进行匹配
-        MdBaseData.strList.Add(MdBaseData.num, tmpLine);
-        MdBaseData.num++;
-        return 1;
+        text(node)
+        return false;
     }
 
+
     //第二行匹配table成功，进入table模式
-    expr = "(\\s*-\\s*|\\s*-:\\s*|\\s*:-\\s*)\\|";
-    mcs = Regex.Matches(MdBaseData.line, expr);
-    var twoLineNum = mcs.Count;
+    let twoLineHeadDatalist = twoLine.split('|');
+    twoLineHeadDatalist.shift()
+    const twoLineNum = twoLineHeadDatalist.length
+
     var tableColNum = oneLineNum > twoLineNum ? oneLineNum : twoLineNum;
     List < List < string >> tableDataList = new List < List < string >> ();
 

@@ -1,9 +1,9 @@
 let LmNode = require("./src/model/LmNode");
-let analysis = require("./src/core/doTextAnalysis");
+let parser = require("./src/core/parser");
 let toHtml = require("./src/core/render");
-let line = require("./src/analysis/lineAnalysis");
-let code = require("./src/analysis/codeAnalysis");
-let math = require("./src/analysis/mathAnalysis");
+let line = require("./src/analysis/lineParser");
+let code = require("./src/analysis/codeParser");
+let math = require("./src/analysis/mathParser");
 
 const aFunList = [];
 aFunList[0] = line
@@ -11,11 +11,11 @@ aFunList[1] = code
 aFunList[2] = math
 
 
-function analysisTextCore(node) {
-    let nodeList = analysis(node, aFunList);
+function parserCore(node) {
+    let nodeList = parser(node, aFunList);
     nodeList.forEach(value => {
         if (value.code!=="text" && value.StrList.length > 0) {
-            analysisTextCore(value)
+            parserCore(value)
         }
     })
 }
@@ -27,7 +27,7 @@ module.exports.render = function (data) {
     node.code = "html"
     node.setData(data)
 
-    analysisTextCore(node)
+    parserCore(node)
     console.log('tohtml---------------------')
     console.log(JSON.stringify(node))
 

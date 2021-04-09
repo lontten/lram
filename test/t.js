@@ -1,6 +1,5 @@
 const LmNode = require("../src/model/LmNode");
 // const table = require("../src/analysis/tableAnalysis");
-const hljs = require('highlight.js');
 
 let node = new LmNode();
 var data = `
@@ -9,15 +8,13 @@ aa|asf|asdfa|
 fsafa|sfsdf|dsf|
 
 `
-const line = "|safas|fsadf|asfasdf";
-reg = /[\s\S]*?|/g
-let match = line.match(reg);
-console.log(RegExp.$1) // 12
-console.log(RegExp.$2) // 21
+const line = "| - |  -  | -: | :-|  -";
+reg =  /^\|((\s*-\s*|\s*-:\s*|\s*:-\s*)\|)+\s*$/
 
-console.log(match[0])
-console.log(match[1])
-console.log(match)
-console.log("===============")
-let exec =reg.exec(line);
-console.log(exec)
+//第二行匹配table，失败
+console.log(reg.test('-|'))
+
+
+let all =line.split('|')
+console.log(all)
+
