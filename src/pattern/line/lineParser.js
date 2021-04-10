@@ -1,4 +1,4 @@
-const LmNode = require("../model/LmNode")
+const LmNode = require("../../model/LmNode")
 /**
  *
  *      # h1

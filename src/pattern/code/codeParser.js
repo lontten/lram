@@ -1,4 +1,4 @@
-let LmNode = require("../model/LmNode");
+let LmNode = require("../../model/LmNode");
 /**
  *
  *      ```java

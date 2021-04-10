@@ -1,7 +1,7 @@
 let LmNode = require("../model/LmNode");
-let line = require("../render/lineRender");
-let code = require("../render/codeRender");
-let text = require("../render/textRender");
+let line = require("../pattern/line/lineRender");
+let code = require("../pattern/code/codeRender");
+let text = require("../pattern/text/textRender");
 module.exports = function doToHtml(node) {
     toHtmlCore(node.NodeList)
     return html

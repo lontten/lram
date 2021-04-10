@@ -1,6 +1,6 @@
 {
   "name": "lram",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "lontten lram markdown js",
   "main": "index.js",
   "scripts": {

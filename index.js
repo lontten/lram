@@ -1,9 +1,9 @@
 let LmNode = require("./src/model/LmNode");
 let parser = require("./src/core/parser");
 let toHtml = require("./src/core/render");
-let line = require("./src/analysis/lineParser");
-let code = require("./src/analysis/codeParser");
-let math = require("./src/analysis/mathParser");
+let line = require("./src/pattern/line/lineParser");
+let code = require("./src/pattern/code/codeParser");
+let math = require("./src/pattern/math/mathParser");
 
 const aFunList = [];
 aFunList[0] = line

@@ -1,4 +1,4 @@
-let text = require("../analysis/text");
+let text = require("../pattern/text/text");
 
 module.exports = function doTextAnalysis(node, funList) {
     while (true) {

@@ -1,5 +1,5 @@
-let LmNode = require("../model/LmNode");
-let text = require("../analysis/text");
+let LmNode = require("../../model/LmNode");
+let text = require("../text/text");
 
 module.exports = function parser(node) {
     switch (node.code) {
