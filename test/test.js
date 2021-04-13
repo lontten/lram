@@ -1,11 +1,12 @@
 let mb = require("../index");
 var t=`
-    \`\`\`
-public void hello(){
-int i=2;
-}
-    \`\`\`
-    
+ aa
+
+$$
+x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}
+$$
+
+
     `
 let s = mb.render(t);
 console.log("ssss-------------html-----")

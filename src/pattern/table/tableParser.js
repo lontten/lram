@@ -8,7 +8,6 @@ module.exports = function parser(node) {
         case "math":
             return false
     }
-
     if (node.StrList.length === 0) {
         return false
     }

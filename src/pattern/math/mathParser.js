@@ -21,7 +21,7 @@ module.exports = function analysis(node) {
     }
 
     let lmNode = new LmNode();
-    lmNode.type = 'code'
+    lmNode.code = 'katex'
     while (true) {
         node.StrList.shift()
 

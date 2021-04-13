@@ -27,7 +27,7 @@ module.exports = function parser(node) {
     console.log('line ana')
     console.log(node)
 
-    let line = node.StrList[0].trim();
+    let line = node.StrList[0];
     let reg = /\s*#+ /
     if (!reg.test(line)) {
         return false;
