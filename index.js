@@ -1,14 +1,18 @@
 let LmNode = require("./src/model/LmNode");
+
 let parser = require("./src/core/parser");
 let toHtml = require("./src/core/render");
+
 let line = require("./src/pattern/line/lineParser");
 let code = require("./src/pattern/code/codeParser");
 let math = require("./src/pattern/math/mathParser");
+let fontFormat = require("./src/pattern/fontFormat/fontFormatParser");
 
 const aFunList = [];
 aFunList[0] = line
 aFunList[1] = code
 aFunList[2] = math
+aFunList[3] = fontFormat
 
 
 function parserCore(node) {

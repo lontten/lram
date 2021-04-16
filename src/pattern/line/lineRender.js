@@ -10,6 +10,8 @@
  * @param node
  * @returns {boolean}
  */
+
+
 module.exports = function render(node) {
     let n = node.map["num"];
     const head = "<h" + n + '>';
