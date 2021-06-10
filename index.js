@@ -12,7 +12,7 @@ const aFunList = [];
 aFunList[0] = line
 aFunList[1] = code
 aFunList[2] = math
-aFunList[3] = fontFormat
+// aFunList[3] = fontFormat
 
 
 function parserCore(node) {
@@ -25,7 +25,7 @@ function parserCore(node) {
 }
 
 
-module.exports.render = function (data) {
+var render = function (data) {
     let node = new LmNode()
 
     node.code = "html"
@@ -39,3 +39,5 @@ module.exports.render = function (data) {
 
     return toHtml(node)
 }
+
+exports.render=render
