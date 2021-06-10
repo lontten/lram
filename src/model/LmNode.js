@@ -9,7 +9,6 @@ module.exports = class LmNode {
     //解析类型
     code
     //解析数据
-    data
 
     map = {}
 
