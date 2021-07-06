@@ -19,6 +19,7 @@ module.exports = function render(node) {
     if (node.NodeList.length > 0) {
         return {
             head: head,
+            data: "",
             end: end
         }
     }

@@ -48,17 +48,12 @@ module.exports = function parser(node) {
             break
         }
         const line = node.StrList[0]
-        console.log("line==============================================")
-        console.log(line)
 
         if (line.trim() === "```") {
             break;
         }
         lmNode.data = lmNode.data+ line+'\n';
         lmNode.StrList.push(line)
-
-        console.log("line==============================================")
-        console.log(lmNode.data)
 
     }
 

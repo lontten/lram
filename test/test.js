@@ -1,4 +1,7 @@
 let mb = require("../index");
+const LmNode = require("../src/model/LmNode")
+let lmNode = new LmNode;
+console.log(lmNode)
 var t=`
 # #  #  #  这是一个标题
 skjfa

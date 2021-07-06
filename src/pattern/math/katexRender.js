@@ -7,7 +7,9 @@ module.exports = function render(node) {
         throwOnError: false
     })
     return {
-        data: html
+        head:"",
+        data: html,
+        end:""
     }
 }
 

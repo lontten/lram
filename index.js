@@ -12,13 +12,14 @@ const aFunList = [];
 aFunList[0] = line
 aFunList[1] = code
 aFunList[2] = math
-// aFunList[3] = fontFormat
+
+aFunList[3] = fontFormat
 
 
 function parserCore(node) {
     let nodeList = parser(node, aFunList);
     nodeList.forEach(value => {
-        if (value.code!=="text" && value.StrList.length > 0) {
+        if (value.code !== "text" && value.StrList.length > 0) {
             parserCore(value)
         }
     })
@@ -40,4 +41,4 @@ var render = function (data) {
     return toHtml(node)
 }
 
-exports.render=render
+exports.render = render

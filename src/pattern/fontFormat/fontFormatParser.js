@@ -38,6 +38,7 @@ module.exports = function parser(node) {
     //匹配code成功
     reg = /^\s*```\s*([\w\W]*?)\s*$/
     let exec = reg.exec(line);
+    console.log(exec)
 
 
     lmNode.code='code'

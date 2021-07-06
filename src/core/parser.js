@@ -2,7 +2,7 @@ let text = require("../pattern/text/text");
 
 module.exports = function doTextAnalysis(node, funList) {
     while (true) {
-        let flag = 0;
+        let flag = false;
         for (let i = 0; i < funList.length; i++) {
             const fun = funList[i];
             //匹配fun

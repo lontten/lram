@@ -4,7 +4,7 @@ let code = require("../pattern/code/codeRender");
 let text = require("../pattern/text/textRender");
 let katex = require("../pattern/math/katexRender");
 module.exports = function doToHtml(node) {
-    html=''
+    html = ''
     toHtmlCore(node.NodeList)
     return html
 }
@@ -12,6 +12,8 @@ module.exports = function doToHtml(node) {
 let html = '';
 
 function toHtmlCore(nodeList) {
+    console.log(nodeList)
+    console.log('nodeList------------------------------------')
     nodeList.forEach(node => {
         if (node.code === "html-h") {
             let b = line(node);
@@ -20,17 +22,13 @@ function toHtmlCore(nodeList) {
             let end = b.end;
             let data = b.data;
 
-            if (head !== undefined) {
-                html += head
-            }
-            if (data !== undefined) {
+            html += head
+            if (data !== '') {
                 html += data
             } else {
                 toHtmlCore(node.NodeList)
             }
-            if (end !== undefined) {
-                html += end
-            }
+            html += end
         }
         if (node.code === "code") {
             let b = code(node);
@@ -39,17 +37,13 @@ function toHtmlCore(nodeList) {
             let end = b.end;
             let data = b.data;
 
-            if (head !== undefined) {
-                html += head
-            }
-            if (data !== undefined) {
+            html += head
+            if (data !== '') {
                 html += data
             } else {
                 toHtmlCore(node.NodeList)
             }
-            if (end !== undefined) {
-                html += end
-            }
+            html += end
         }
         if (node.code === "katex") {
             let b = katex(node);
@@ -58,40 +52,29 @@ function toHtmlCore(nodeList) {
             let end = b.end;
             let data = b.data;
 
-            if (head !== undefined) {
-                html += head
-            }
-            if (data !== undefined) {
+            html += head
+            if (data !== '') {
                 html += data
             } else {
                 toHtmlCore(node.NodeList)
             }
-            if (end !== undefined) {
-                html += end
-            }
+            html += end
         }
 
         if (node.code === "text") {
             let b = text(node);
-
             let head = b.head;
             let end = b.end;
             let data = b.data;
 
-            if (head !== undefined) {
-                html += head
-            }
-            if (data !== undefined) {
+            html += head
+            if (data !== '') {
                 html += data
             } else {
                 toHtmlCore(node.NodeList)
             }
-            if (end !== undefined) {
-                html += end
-            }
+            html += end
         }
-
-
     })
 
 }

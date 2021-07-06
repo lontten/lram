@@ -12,7 +12,9 @@
  */
 module.exports = function render(node) {
     return {
+        head: '',
         data: node.data,
+        end: ''
     }
 }
 
