@@ -23,15 +23,13 @@ km.use('line', function (line) {
 })
 
 
-
 km.parserInner((line) => {
-return {
-    start:"",
-    content:node,
-    end:""
-}
+    return {
+        start: "",
+        content: node,
+        end: ""
+    }
 })
-
 
 
 km.parserLine((line) => {
@@ -39,16 +37,13 @@ km.parserLine((line) => {
 })
 
 
-km.parserDiv(
-    (lines) => {
+km.parserDiv({
+    parse: (lines) => {
 
     },
-    (lines) => {
+    data: (lines) => {
 
-    },
-    (lines) => {
+    }
 
-    },
-
-)
+})
 

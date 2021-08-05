@@ -2,3 +2,38 @@
 
 export function render(data: string): string;
 
+export class Token {
+    //解析类型
+    code: string
+    //解析数据
+    map: any
+    Tokens: Token[]
+    StrList: string[]
+
+}
+
+export class Brif {
+    hasRender //true 渲染之后的数据,不可再次解析 ，false 可以继续解析的数据
+    data
+}
+
+
+export class Tokens {
+    line: number;
+    tokens: Token[]
+}
+
+export class PlugTrans {
+
+    parser(lines: string[]): Tokens
+
+    render(token: Token): Brif[]
+
+    inLineType: string[]
+
+}
+
+export class Lram {
+    public use(p: PlugTrans)
+    public render(p: string): string
+}
