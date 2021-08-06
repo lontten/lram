@@ -10,11 +10,8 @@ export class Token {
     Tokens: Token[]
     StrList: string[]
 
-}
+    txt:string
 
-export class Brif {
-    hasRender //true 渲染之后的数据,不可再次解析 ，false 可以继续解析的数据
-    data
 }
 
 
@@ -24,12 +21,12 @@ export class Tokens {
 }
 
 export class PlugTrans {
+    code:string
+    inLineType: string[]
 
     parser(lines: string[]): Tokens
 
-    render(token: Token): Brif[]
-
-    inLineType: string[]
+    render(token: Token):Token
 
 }
 

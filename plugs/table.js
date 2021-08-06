@@ -1,5 +1,18 @@
 import {Brif} from '../index'
 
+// let token1 = new Token();
+// token1.code="txt"
+// token1.txt=head
+// token.Tokens.push(token1)
+//
+// token1.code="html-h"
+// token1.txt=data
+// token.Tokens.push(token1)
+//
+// token1.code="txt"
+// token1.txt=end
+// token.Tokens.push(token1)
+
 var talbe = {
     code: "html-h",
     inLineType: ["code", "tag-h"],//解析后的数据可被这些类型继续解析
@@ -12,7 +25,7 @@ var talbe = {
                 line: 0
             }
         }
-        var arr = []
+        const arr = [];
 
 
         reg = /(\s*#+ )([\w\W]*)/
@@ -35,13 +48,13 @@ var talbe = {
     },
     render: [
         {
-            code: "table",
+            code: "html-h",
             fun: function (token) {
-                let brif = new Brif();
 
                 let n = token.map["num"];
                 const head = "<h" + n + '>';
                 const end = "</h" + n + '>';
+
                 if (token.Tokens.length > 0) {
                     return {
                         head: head,
@@ -52,13 +65,10 @@ var talbe = {
 
                 return {
                     head: head,
-                    data: node.data,
+                    data: token.Tokens,
                     end: end
                 }
 
-
-                var arr = []
-                return arr
             },
         }
     ]
