@@ -1,11 +1,3 @@
-let require1 = require('../plugs/table');
-import {Lram, PlugTrans, Token, Tokens} from '../index'
-
-let lram = new Lram();
-
-let txtP = new PlugTrans();
-
-
-lram.use(require1)
-
-let s = lram.render("wo");
+s=' #c sdfa sadfas #c dsafas sdfasdf'
+let strings = s.split('#c ');
+console.log(strings)
