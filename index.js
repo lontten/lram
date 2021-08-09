@@ -1,44 +1,73 @@
-let LmNode = require("./src/model/LmNode");
+let line = require("./plug/line");
+let txt = require("./plug/txt");
+let color = require("./plug/color");
+let katex = require("./plug/katex");
+let code = require("./plug/code");
+const parserMap = {}
+const innerFun = {}
+const renderMap = {}
 
-let parser = require("./src/core/parser");
-let toHtml = require("./src/core/render");
-
-let line = require("./src/pattern/line/lineParser");
-let code = require("./src/pattern/code/codeParser");
-let math = require("./src/pattern/math/mathParser");
-let fontFormat = require("./src/pattern/fontFormat/fontFormatParser");
-
-const aFunList = [];
-aFunList[0] = line
-aFunList[1] = code
-aFunList[2] = math
-
-aFunList[3] = fontFormat
-
-
-function parserCore(node) {
-    let nodeList = parser(node, aFunList);
-    nodeList.forEach(value => {
-        if (value.code !== "text" && value.StrList.length > 0) {
-            parserCore(value)
+class Cen {
+    use(f) {
+        console.log('use')
+        if (f.parser !== undefined) {
+            parserMap[f.code] = f.parser
         }
-    })
+        f.render.map(render => {
+            renderMap[render.code] = render.fun
+            innerFun[render.code] = render.subParserType
+        })
+    }
+
+    render(str) {
+        return coreTran(str, {code: 'init'})
+    }
 }
 
 
-var render = function (data) {
-    let node = new LmNode()
-
-    node.code = "html"
-    node.setData(data)
-
-    parserCore(node)
-    console.log('tohtml---------------------')
-    console.log(JSON.stringify(node))
-
-
-
-    return toHtml(node)
+function render(token) {
+    return renderMap[token.code](token, coreTran)
 }
 
-exports.render = render
+
+function coreTran(lineData, preToken) {
+    let lines = lineData.trim().split('\n');
+    let html = '';
+
+    for (; lines.length > 0;) {
+        let flag = false;
+
+        for (const p of Object.keys(parserMap)) {
+
+            if (preToken.code === 'init' || innerFun[preToken.code].indexOf(p) > 0) {
+                let ds = parserMap[p](lines);
+                if (ds.line > 0) {
+                    flag = true
+                    lines.shift()
+                    ds.tokens.map(token => {
+                        html += render(token)
+                    })
+                    break
+                }
+            }
+        }
+
+        if (!flag) {
+            html += lines[0]
+            lines.shift()
+        }
+    }
+    return html
+}
+
+
+
+let cen = new Cen();
+cen.use(txt)
+cen.use(line)
+cen.use(color)
+cen.use(katex)
+cen.use(code)
+
+
+module.exports = Cen

@@ -1,5 +1,6 @@
 const hljs = require("highlight.js");
 const plug = {
+    code: 'code',
     parser: function (lines) {
         const arr = [];
         let lineNum = 0
@@ -20,7 +21,7 @@ const plug = {
 
         const token = {};
         token.code = 'code'
-        token.data={}
+        token.data = {}
         token.data["type"] = exec[1]
         while (true) {
             lines.shift()
@@ -52,7 +53,7 @@ const plug = {
             subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
                 const highlightedCode = hljs.highlightAuto(token.data['data']).value
-                return '<pre><code class="hljs">'+highlightedCode+'</code></pre>'
+                return '<pre><code class="hljs">' + highlightedCode + '</code></pre>'
             },
         }
     ]

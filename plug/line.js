@@ -38,7 +38,7 @@ const plug = {
     render: [
         {
             code: "html-h",
-            subParserType: ["line-style"],//解析后的数据可被这些类型继续解析
+            subParserType: ["line-style",'color'],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
                 let n = token.data["num"];
                 const head = "<h" + n + '>';

@@ -1,6 +1,6 @@
 const katex = require('katex');
 const plug = {
-    code: "html-h",
+    code: "katex",
     parser: function (lines) {
         const arr = [];
         let lineNum=0

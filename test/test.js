@@ -1,18 +1,11 @@
-let mb = require("../index");
-const LmNode = require("../src/model/LmNode")
-let lmNode = new LmNode;
-console.log(lmNode)
+let c = require('../index');
+
+let lram = new c()
 var t=`
-# #  #  #  这是一个标题
-skjfa
-aaaaaa
+# #  #c  #  这是一个标题
 
-\`\`\`java
-    public void hello(){
-
-}
-\`\`\`
+### asdfasf #c sdfdsaf
  `
-let s = mb.render(t);
+let s = lram.render(t)
 console.log("ssss-------------html-----")
 console.log(s)
