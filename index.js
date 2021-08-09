@@ -46,7 +46,6 @@ function coreTran(lineData, preToken) {
         let flag = false;
 
         let parserFunCodes = Object.keys(parserMap);
-        console.log('codes   ' + parserFunCodes)
         for (const p of parserFunCodes) {
             if (preToken.code !== 'init' && innerFun[preToken.code].indexOf(p) < 0) {
                 continue
@@ -56,24 +55,43 @@ function coreTran(lineData, preToken) {
             }
 
 
+            console.log('ppp pp:------------------: '+p)
+            console.log('html core********************************8 ;;;'+JSON.stringify(lines))
             let ds = parserMap[p](lines);
+            console.log('html core********************************8 ;;;'+JSON.stringify(lines)+JSON.stringify(ds))
+
             if (ds.line > 0) {
                 flag = true
+                console.log('html core********************************87 ;;;'+JSON.stringify(lines))
                 lines.shift()
                 ds.tokens.map(token => {
+                    console.log('+= :: '+html)
                     html += coreRender(token)
                 })
                 break
             }
+            console.log('html core********************************8 ;;;'+JSON.stringify(lines))
+
         }
 
         if (!flag) {
-            html += lines[0]
+            console.log('p flag fa :: '+JSON.stringify(lines))
+            console.log('p flag fa :tttttttttttttttt: '+JSON.stringify(html))
+            if (lines.length===0){
+                break
+            }
+            html += coreRender({
+                code:'txt',
+                data:lines[0]
+            })
             lines.shift()
         }
+        console.log('didiididid========:'+html)
     }
     return html
 }
+
+
 
 function render(str) {
     let cen = new Core();

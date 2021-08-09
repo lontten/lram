@@ -2,9 +2,12 @@ let r = require('../index');
 
 
 var t=`
-fdfsdf
+aaa
 \`\`\`
+bb
+cc
 
+dddd
  `
 let s = r.render(t)
 console.log("ssss-------------html-----")

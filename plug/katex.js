@@ -1,7 +1,8 @@
 const katex = require('katex');
 const plug = {
     code: "katex",
-    parser: function (lines) {
+    parser: function (source) {
+        lines=source
         const arr = [];
         let lineNum=0
 

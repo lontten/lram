@@ -2,19 +2,19 @@
 # yarn lockfile v1
 
 
-"commander@^6.0.0":
-  "integrity" "sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA== sha1-B5LraC37wyWZm7K4T93duhEKxzw="
-  "resolved" "https://registry.nlark.com/commander/download/commander-6.2.1.tgz?cache=0&sync_timestamp=1627358254258&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcommander%2Fdownload%2Fcommander-6.2.1.tgz"
-  "version" "6.2.1"
+commander@^6.0.0:
+  version "6.2.1"
+  resolved "https://registry.nlark.com/commander/download/commander-6.2.1.tgz?cache=0&sync_timestamp=1627358254258&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcommander%2Fdownload%2Fcommander-6.2.1.tgz"
+  integrity "sha1-B5LraC37wyWZm7K4T93duhEKxzw= sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA=="
 
-"highlight.js@^10.7.2":
-  "integrity" "sha512-oFLl873u4usRM9K63j4ME9u3etNF0PLiJhSQ8rdfuL51Wn3zkD6drf9ZW0dOzjnZI22YYG24z30JcmfCZjMgYg== sha1-iTGbhh7cZsSIVO0ebaIeqJ+Ec2A="
-  "resolved" "https://registry.nlark.com/highlight.js/download/highlight.js-10.7.2.tgz"
-  "version" "10.7.2"
+highlight.js@^11.2.0:
+  version "11.2.0"
+  resolved "https://registry.nlark.com/highlight.js/download/highlight.js-11.2.0.tgz#a7e3b8c1fdc4f0538b93b2dc2ddd53a40c6ab0f0"
+  integrity sha1-p+O4wf3E8FOLk7LcLd1TpAxqsPA=
 
-"katex@^0.13.2":
-  "integrity" "sha512-u/KhjFDhyPr+70aiBn9SL/9w/QlLagIXBi2NZSbNnBUp2tR8dCjQplyEMkEzniem5gOeSCBjlBUg4VaiWs1JJg== sha1-QHW5FE5q+ZLsmkt3L6N1R2O+XyY="
-  "resolved" "https://registry.nlark.com/katex/download/katex-0.13.2.tgz"
-  "version" "0.13.2"
+katex@^0.13.13:
+  version "0.13.13"
+  resolved "https://registry.nlark.com/katex/download/katex-0.13.13.tgz#15a796e95516869bc6d483443b58b2df872ee40f"
+  integrity sha1-FaeW6VUWhpvG1INEO1iy34cu5A8=
   dependencies:
-    "commander" "^6.0.0"
+    commander "^6.0.0"

@@ -1,13 +1,15 @@
-var s={
-    "a":"aa",
-    "b":"bb"
+let lines={
+    a:'ss'
 }
+console.log(JSON.stringify(lines))
+h(lines)
 
-var b={}
-b['a']="akk"
-b['b']="bkk"
+console.log(JSON.stringify(lines))
 
-b.map(k=>{
-    console.log(k)
-    console.log(b[k])
-})
+
+
+
+function h(s) {
+    lines=s
+    lines.a='sssssssss'
+}

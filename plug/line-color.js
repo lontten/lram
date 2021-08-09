@@ -1,6 +1,7 @@
 const plug = {
     code: 'line-color',
-    parser: function (lines) {
+    parser: function (source) {
+        lines=source
         const arr = [];
 
         let line = lines[0];
