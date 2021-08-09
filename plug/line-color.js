@@ -1,5 +1,5 @@
 const plug = {
-    code: 'color',
+    code: 'line-color',
     parser: function (lines) {
         const arr = [];
 
@@ -26,7 +26,7 @@ const plug = {
     },
     render: [
         {
-            code: "color",
+            code: "line-color",
             subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
                 return '<span style="color: red">' + token.data + '</span>'

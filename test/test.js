@@ -1,11 +1,11 @@
-let c = require('../index');
+let r = require('../index');
 
-let lram = new c()
+
 var t=`
-# #  #c  #  这是一个标题
+fdfsdf
+\`\`\`
 
-### asdfasf #c sdfdsaf
  `
-let s = lram.render(t)
+let s = r.render(t)
 console.log("ssss-------------html-----")
 console.log(s)

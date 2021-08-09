@@ -15,6 +15,7 @@ const plug = {
 
         let token = {}
         token.code = 'katex'
+        token.data=''
         while (true) {
             lines.shift()
             lineNum++
@@ -26,12 +27,12 @@ const plug = {
             const line = lines[0]
 
             if (line.trim() === "$$") {
-                break;
+                lineNum++
+                break
             }
             token.data += line;
         }
 
-        console.log('katex token:: '+token)
         arr.push(token)
 
         return {

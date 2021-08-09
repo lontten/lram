@@ -23,6 +23,7 @@ const plug = {
         token.code = 'code'
         token.data = {}
         token.data["type"] = exec[1]
+        token.data['data']=''
         while (true) {
             lines.shift()
             lineNum++
@@ -32,13 +33,13 @@ const plug = {
             }
             const line = lines[0]
 
-            if (line.trim() === "```") {
-                break;
+            if (line === "```") {
+                lineNum++
+                break
             }
             token.data['data'] += line + '\n';
         }
 
-        console.log('code token:: ' + token)
         arr.push(token)
 
         return {
@@ -52,6 +53,7 @@ const plug = {
             code: "code",
             subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
+
                 const highlightedCode = hljs.highlightAuto(token.data['data']).value
                 return '<pre><code class="hljs">' + highlightedCode + '</code></pre>'
             },

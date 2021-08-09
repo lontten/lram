@@ -1,6 +1,6 @@
 {
   "name": "lram",
-  "version": "0.1.0-aleph",
+  "version": "0.2.2-alpha",
   "description": "lontten lram markdown js",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "author": "lontten",
   "license": "ISC",
   "dependencies": {
-    "highlight.js": "^10.7.2",
-    "katex": "^0.13.2"
+    "highlight.js": "^11.2.0",
+    "katex": "^0.13.13"
   }
 }

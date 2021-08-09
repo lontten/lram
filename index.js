@@ -1,15 +1,15 @@
 let line = require("./plug/line");
 let txt = require("./plug/txt");
-let color = require("./plug/color");
+let color = require("./plug/line-color");
 let katex = require("./plug/katex");
 let code = require("./plug/code");
 const parserMap = {}
 const innerFun = {}
 const renderMap = {}
 
-class Cen {
+class Core {
+
     use(f) {
-        console.log('use')
         if (f.parser !== undefined) {
             parserMap[f.code] = f.parser
         }
@@ -25,30 +25,39 @@ class Cen {
 }
 
 
-function render(token) {
+function coreRender(token) {
     return renderMap[token.code](token, coreTran)
 }
 
 
 function coreTran(lineData, preToken) {
     let lines = lineData.trim().split('\n');
+
     let html = '';
 
     for (; lines.length > 0;) {
         let flag = false;
 
-        for (const p of Object.keys(parserMap)) {
+        let parserFunCodes = Object.keys(parserMap);
+        console.log('codes   '+parserFunCodes)
+        for (const p of parserFunCodes) {
+            if (preToken.code !== 'init' && innerFun[preToken.code].indexOf(p) < 0) {
+                continue
+            }
+            if (preToken.code === 'init' && p.substr(0,5)==='line-') {
+                continue
+            }
 
-            if (preToken.code === 'init' || innerFun[preToken.code].indexOf(p) > 0) {
-                let ds = parserMap[p](lines);
-                if (ds.line > 0) {
-                    flag = true
-                    lines.shift()
-                    ds.tokens.map(token => {
-                        html += render(token)
-                    })
-                    break
-                }
+
+
+            let ds = parserMap[p](lines);
+            if (ds.line > 0) {
+                flag = true
+                lines.shift()
+                ds.tokens.map(token => {
+                    html += coreRender(token)
+                })
+                break
             }
         }
 
@@ -60,14 +69,15 @@ function coreTran(lineData, preToken) {
     return html
 }
 
+function render(str) {
+    let cen = new Core();
+    cen.use(txt)
+    cen.use(line)
+    cen.use(color)
+    cen.use(katex)
+    cen.use(code)
 
+    return cen.render(str)
+}
 
-let cen = new Cen();
-cen.use(txt)
-cen.use(line)
-cen.use(color)
-cen.use(katex)
-cen.use(code)
-
-
-module.exports = Cen
+exports.render = render
