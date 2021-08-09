@@ -1,4 +1,5 @@
-let p1 = require("./plug/line");
+let line = require("./plug/line");
+let txt = require("./plug/txt");
 let color = require("./plug/color");
 let katex = require("./plug/katex");
 let code = require("./plug/code");
@@ -6,13 +7,12 @@ const parserArr = []
 const innerFun = {}
 const renderMap = {}
 
-renderMap['txt']=function (token, tran) {
-    return token.data
-}
 
 class Cen {
     use(f) {
-        parserArr.push(f.parser)
+        if (f.parser!==undefined){
+            parserArr.push(f.parser)
+        }
         f.render.map(render => {
             renderMap[render.code] = render.fun
             render.subParserType.map(typ => {
@@ -66,11 +66,11 @@ function log(ss) {
 }
 
 let cen = new Cen();
-cen.use(p1)
+cen.use(txt)
+cen.use(line)
 cen.use(color)
 cen.use(katex)
 cen.use(code)
-let s = JSON.stringify(cen);
 console.log(parserArr)
 console.log(renderMap)
 console.log(innerFun)
