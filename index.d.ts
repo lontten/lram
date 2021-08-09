@@ -2,3 +2,10 @@
 
 export function render(data: string): string;
 
+export class Core {
+    use(data: any): void
+
+    render(data: string): string
+}
+
+export let lram: Core

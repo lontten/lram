@@ -8,6 +8,13 @@ const innerFun = {}
 const renderMap = {}
 
 class Core {
+    constructor() {
+        this.use(txt)
+        this.use(line)
+        this.use(color)
+        this.use(katex)
+        this.use(code)
+    }
 
     use(f) {
         if (f.parser !== undefined) {
@@ -39,15 +46,14 @@ function coreTran(lineData, preToken) {
         let flag = false;
 
         let parserFunCodes = Object.keys(parserMap);
-        console.log('codes   '+parserFunCodes)
+        console.log('codes   ' + parserFunCodes)
         for (const p of parserFunCodes) {
             if (preToken.code !== 'init' && innerFun[preToken.code].indexOf(p) < 0) {
                 continue
             }
-            if (preToken.code === 'init' && p.substr(0,5)==='line-') {
+            if (preToken.code === 'init' && p.substr(0, 5) === 'line-') {
                 continue
             }
-
 
 
             let ds = parserMap[p](lines);
@@ -71,13 +77,8 @@ function coreTran(lineData, preToken) {
 
 function render(str) {
     let cen = new Core();
-    cen.use(txt)
-    cen.use(line)
-    cen.use(color)
-    cen.use(katex)
-    cen.use(code)
-
     return cen.render(str)
 }
 
 exports.render = render
+exports.lram = new Core()
