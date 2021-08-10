@@ -1,4 +1,4 @@
-let lines={
+let liness={
     a:'ss'
 }
 console.log(JSON.stringify(lines))
