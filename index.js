@@ -7,6 +7,7 @@ const parserMap = {}
 const innerFun = {}
 const renderMap = {}
 
+
 class Core {
     constructor() {
         this.use(txt)
