@@ -1,22 +1,18 @@
 const plug = {
     code: "html-h",
-    parser: function (source) {
-        let lines = source
+    parser: function (lines) {
         const arr = [];
 
         let line = lines[0];
         let reg = /\s*#+ /
         if (!reg.test(line)) {
-            console.log('html-h false::'+line)
             return {
                 line: 0
             }
         }
 
-        console.log('html-h true::'+line)
         reg = /(\s*#+ )([\w\W]*)/
         let exec = reg.exec(line);
-        console.log('exec::'+exec)
 
         let head = exec[1];
         let data = exec[2];
@@ -28,7 +24,6 @@ const plug = {
         token.data["num"] = head.length - 1
         token.data['data'] = data
         arr.push(token)
-
 
         return {
             line: 1,

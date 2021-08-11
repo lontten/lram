@@ -4,8 +4,9 @@ let r = require('../index');
 var t=`
 aaa
 \`\`\`
-bb
+bb<br>
 cc
+\`\`\`
 
 dddd
  `

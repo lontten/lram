@@ -1,13 +1,11 @@
 const katex = require('katex');
 const plug = {
     code: "katex",
-    parser: function (source) {
-        let lines = source
+    parser: function (lines) {
         const arr = [];
         let lineNum=0
 
         let line = lines[0]
-        console.log('katex false :: '+line)
         if (line !== "$$") {
             return {
                 line: 0

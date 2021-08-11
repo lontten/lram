@@ -42,7 +42,8 @@ function coreTran(lineData, preToken) {
 
     let html = '';
 
-    for (; lines.length > 0;) {
+    while (lines.length > 0) {
+
         let flag = false;
 
         let parserFunCodes = Object.keys(parserMap);
@@ -54,48 +55,30 @@ function coreTran(lineData, preToken) {
                 continue
             }
 
-            var s=lines
 
-            console.log('ppp pp:------------------: '+p)
-            console.log('html core*************qq******l*************8 ;;;'+JSON.stringify(lines))
-            console.log('html core************qq*********s***********8 ;;;'+JSON.stringify(s))
-            let ds = parserMap[p](lines);
-            console.log('html core**************hh*********l*********8 ;;;'+JSON.stringify(lines)+JSON.stringify(ds))
-            console.log('html core*************hh********s***********8 ;;;'+JSON.stringify(s)+JSON.stringify(ds))
+            const v = JSON.parse(JSON.stringify(lines));
+            let ds = parserMap[p](v);
 
             if (ds.line > 0) {
                 flag = true
-                console.log('html core********************************87 ;;;'+JSON.stringify(lines))
-                lines.shift()
-                console.log("-----------------------------lines -------------------- del ")
+                lines.splice(0, ds.line)
                 ds.tokens.map(token => {
-                    console.log('+= :: '+html)
                     html += coreRender(token)
                 })
                 break
             }
-            console.log('html core********************************8 ;;;'+JSON.stringify(lines))
-
         }
 
         if (!flag) {
-            console.log('p flag fa :: '+JSON.stringify(lines))
-            console.log('p flag fa :tttttttttttttttt: '+JSON.stringify(html))
-            if (lines.length===0){
-                continue
-            }
             html += coreRender({
-                code:'txt',
-                data:lines[0]
+                code: 'txt',
+                data: lines[0]
             })
             lines.shift()
-            console.log("-----------------------------lines -------------------- del ")
         }
-        console.log('didiididid========:'+html)
     }
     return html
 }
-
 
 
 function render(str) {

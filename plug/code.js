@@ -1,8 +1,7 @@
 const hljs = require("highlight.js");
 const plug = {
     code: 'code',
-    parser: function (source) {
-        let lines = source;
+    parser: function (lines) {
         const arr = [];
         let lineNum = 0
 
@@ -11,7 +10,6 @@ const plug = {
 
         let reg = /^\s*```/
         if (!reg.test(line)) {
-            console.log('code false :: ' + line)
             return {
                 line: 0
             }
@@ -30,7 +28,6 @@ const plug = {
             lineNum++
 
             if (lines.length === 0) {
-                lines='vvvvvvv'
                 console.log('code di re :: '+JSON.stringify(token))
                 return {
                     line: 0
