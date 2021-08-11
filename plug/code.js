@@ -8,14 +8,15 @@ const plug = {
         let line = lines[0]
 
 
-        let reg = /^\s*```/
+        let reg = /^```/
         if (!reg.test(line)) {
+            console.log('code p false ')
             return {
                 line: 0
             }
         }
 
-        reg = /^\s*```\s*([\w\W]*?)\s*$/
+        reg = /^```\s*([\w\W]*?)\s*$/
         let exec = reg.exec(line);
 
         const token = {};

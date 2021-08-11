@@ -4,14 +4,16 @@ const plug = {
         const arr = [];
 
         let line = lines[0];
-        let reg = /\s*#+ /
+        let reg = /^#+ /
         if (!reg.test(line)) {
+            console.log('line p false ')
             return {
                 line: 0
             }
         }
+        console.log('line p true::'+line)
 
-        reg = /(\s*#+ )([\w\W]*)/
+        reg = /(^#+ )([\w\W]*)/
         let exec = reg.exec(line);
 
         let head = exec[1];

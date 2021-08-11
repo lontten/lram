@@ -7,6 +7,7 @@ const plug = {
 
         let line = lines[0]
         if (line !== "$$") {
+            console.log('katex p false ')
             return {
                 line: 0
             }

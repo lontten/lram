@@ -57,6 +57,7 @@ function coreTran(lineData, preToken) {
 
 
             const v = JSON.parse(JSON.stringify(lines));
+            console.log(JSON.stringify(v))
             let ds = parserMap[p](v);
 
             if (ds.line > 0) {
@@ -70,7 +71,7 @@ function coreTran(lineData, preToken) {
         }
         if (!flag) {
             let string = lines[0];
-            if (string.substr(0,2)==='//'){
+            if (string.substr(0,2)!=='//'){
                 html += coreRender({
                     code: 'txt',
                     data: string
@@ -83,10 +84,4 @@ function coreTran(lineData, preToken) {
 }
 
 
-function render(str) {
-    let cen = new Core();
-    return cen.render(str)
-}
-
-exports.render = render
 exports.lram = new Core()

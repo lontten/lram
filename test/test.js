@@ -1,15 +1,10 @@
-let r = require('../index');
+let lram = require('../index');
 
 
 var t=`
-aaa
-\`\`\`
-bb<br>
-cc
-\`\`\`
-
-dddd
+//aa# ccc
+bbb
  `
-let s = r.render(t)
+let s = lram.lram.render(t)
 console.log("ssss-------------html-----")
 console.log(s)
