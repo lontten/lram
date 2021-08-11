@@ -1,6 +1,6 @@
 const hljs = require("highlight.js");
 const plug = {
-    code: 'code',
+    code: 's-code',
     parser: function (lines) {
         const arr = [];
         let lineNum = 0
@@ -10,7 +10,6 @@ const plug = {
 
         let reg = /^```/
         if (!reg.test(line)) {
-            console.log('code p false ')
             return {
                 line: 0
             }
@@ -20,7 +19,7 @@ const plug = {
         let exec = reg.exec(line);
 
         const token = {};
-        token.code = 'code'
+        token.code = 's-code'
         token.data = {}
         token.data["type"] = exec[1]
         token.data['data']=''
@@ -29,7 +28,6 @@ const plug = {
             lineNum++
 
             if (lines.length === 0) {
-                console.log('code di re :: '+JSON.stringify(token))
                 return {
                     line: 0
                 }
@@ -53,10 +51,9 @@ const plug = {
     },
     render: [
         {
-            code: "code",
+            code: "s-code",
             subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
-
                 const highlightedCode = hljs.highlightAuto(token.data['data']).value
                 return '<pre><code class="hljs">' + highlightedCode + '</code></pre>'
             },

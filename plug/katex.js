@@ -1,20 +1,19 @@
 const katex = require('katex');
 const plug = {
-    code: "katex",
+    code: "s-katex",
     parser: function (lines) {
         const arr = [];
         let lineNum=0
 
         let line = lines[0]
         if (line !== "$$") {
-            console.log('katex p false ')
             return {
                 line: 0
             }
         }
 
         let token = {}
-        token.code = 'katex'
+        token.code = 's-katex'
         token.data=''
         while (true) {
             lines.shift()
@@ -43,14 +42,13 @@ const plug = {
     },
     render: [
         {
-            code: "katex",
+            code: "s-katex",
             subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
                 html= katex.renderToString(token.data, {
                     displayMode: true,
                     throwOnError: false
                 })
-                console.log('html::'+html)
                 return html
             },
         }

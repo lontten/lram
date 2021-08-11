@@ -1,6 +1,6 @@
-let line = require("./plug/line");
+let line = require("./plug/title");
 let txt = require("./plug/txt");
-let color = require("./plug/line-color");
+let color = require("./plug/line/color");
 let katex = require("./plug/katex");
 let code = require("./plug/code");
 const parserMap = {}
@@ -15,6 +15,10 @@ class Core {
         this.use(color)
         this.use(katex)
         this.use(code)
+    }
+
+    useLineStyle(f){
+
     }
 
     use(f) {
@@ -34,6 +38,7 @@ class Core {
 
 
 function coreRender(token) {
+    console.log('do render ::'+token.code)
     return renderMap[token.code](token, coreTran)
 }
 
@@ -50,9 +55,6 @@ function coreTran(lineData, preToken) {
         let parserFunCodes = Object.keys(parserMap);
         for (const p of parserFunCodes) {
             if (preToken.code !== 'init' && innerFun[preToken.code].indexOf(p) < 0) {
-                continue
-            }
-            if (preToken.code === 'init' && p.substr(0, 5) === 'line-') {
                 continue
             }
 
@@ -74,7 +76,7 @@ function coreTran(lineData, preToken) {
             let string = lines[0];
             if (string.substr(0,2)!=='//'){
                 html += coreRender({
-                    code: 'txt',
+                    code: 's-txt',
                     data: string
                 })
             }

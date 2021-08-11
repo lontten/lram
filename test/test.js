@@ -2,7 +2,7 @@ let lram = require('../index');
 
 
 var t=`
-//aa# ccc
+ss #c sdfasdf
 bbb
  `
 let s = lram.lram.render(t)

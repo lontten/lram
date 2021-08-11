@@ -1,17 +1,15 @@
 const plug = {
-    code: "html-h",
+    code: "s-title",
     parser: function (lines) {
         const arr = [];
 
         let line = lines[0];
         let reg = /^#+ /
         if (!reg.test(line)) {
-            console.log('line p false ')
             return {
                 line: 0
             }
         }
-        console.log('line p true::'+line)
 
         reg = /(^#+ )([\w\W]*)/
         let exec = reg.exec(line);
@@ -21,7 +19,7 @@ const plug = {
 
 
         let token = {}
-        token.code = "html-h"
+        token.code = "s-title"
         token.data={}
         token.data["num"] = head.length - 1
         token.data['data'] = data
@@ -35,8 +33,8 @@ const plug = {
     },
     render: [
         {
-            code: "html-h",
-            subParserType: ["line-style",'color'],//解析后的数据可被这些类型继续解析
+            code: "s-title",
+            subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
                 let n = token.data["num"];
                 const head = "<h" + n + '>';
