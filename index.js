@@ -68,12 +68,14 @@ function coreTran(lineData, preToken) {
                 break
             }
         }
-
         if (!flag) {
-            html += coreRender({
-                code: 'txt',
-                data: lines[0]
-            })
+            let string = lines[0];
+            if (string.substr(0,2)==='//'){
+                html += coreRender({
+                    code: 'txt',
+                    data: string
+                })
+            }
             lines.shift()
         }
     }
