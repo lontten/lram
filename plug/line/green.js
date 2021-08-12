@@ -2,7 +2,7 @@ const plug = {
     parser: function (line) {
         const arr = [];
 
-        let split = line.split('#c ');
+        let split = line.split('#g ');
         if (split.length===1){
             return {
                 match:false
@@ -17,7 +17,7 @@ const plug = {
         split.splice(0, 1)
         split.map(k => {
             let token = {}
-            token.code = "l-color"
+            token.code = "l-green"
             token.data = k
             arr.push(token)
         })
@@ -29,10 +29,10 @@ const plug = {
     },
     render: [
         {
-            code: "l-color",
+            code: "l-green",
             subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (line) {
-                return '<span style="color: red">' + line + '</span>'
+                return '<span style="color: green">' + line + '</span>'
             },
         }
     ]

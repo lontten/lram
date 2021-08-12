@@ -1,11 +1,14 @@
 let line = require("./plug/title");
 let txt = require("./plug/txt");
 let color = require("./plug/line/color");
+let green = require("./plug/line/green");
 let katex = require("./plug/katex");
 let code = require("./plug/code");
 const parserMap = {}
 const innerFun = {}
 const renderMap = {}
+
+const lineStyleParserArr = []
 const lineStyleRenderMap = {}
 
 class Core {
@@ -13,15 +16,16 @@ class Core {
         this.use(line)
         this.use(katex)
         this.use(code)
-
         this.use(txt)
+
         this.useLineStyle(color)
+        this.useLineStyle(green)
 
     }
 
     useLineStyle(f) {
         if (f.parser !== undefined) {
-            parserMap[f.code] = f.parser
+            lineStyleParserArr.push(f.parser)
         }
         f.render.map(render => {
             lineStyleRenderMap[render.code] = render.fun
@@ -45,8 +49,8 @@ class Core {
 
 
 function coreRender(token) {
-    if (token.code.substr(0, 2) === 'l-') {
-        return lineStyleRender(token)
+    if (token.code === 's-txt') {
+        return lineStyleCoreTran(token.data)
     }
 
     console.log('do coreRender ::' + token.code)
@@ -54,22 +58,53 @@ function coreRender(token) {
 }
 
 
-function lineStyleRender(token) {
-    console.log('do lineStyleRender ::' + token.code)
-    return lineStyleRenderMap[token.code](token, coreTran)
+function lineStyleCoreTran(line) {
+    var i = 0
+    let html = '';
+    console.log('do lineStyleCoreTran ::' + line)
+    while (true) {
+        let flag = false;
+        for (let lineP of lineStyleParserArr) {
+            let ds = lineP(line);
+            console.log("lst  ds ::" + JSON.stringify(ds))
+            if (ds.match) {
+                flag = true
+                for (let token of ds.tokens) {
+                    if (token.code === 's-txt') {
+                        i++
+                        if (i === 3) {
+                            throw '100'
+                        }
+                        console.log('lst stxt ::' + JSON.stringify(token))
+                        html += lineStyleCoreTran(token.data)
+                    } else {
+                        console.log('lst  r map :: ' + JSON.stringify(token))
+                        html += lineStyleRenderMap[token.code](token.data)
+                    }
+                }
+                return html
+            }
+        }
+        if (!flag) {
+            html += line
+            break
+        }
+    }
+    console.log('lst  ::' + html)
+    return html
 }
 
 
 function coreTran(lineData, preToken) {
+    if (preToken.code === 's-txt') {
+        return lineStyleCoreTran(lineData)
+    }
+
     let lines = lineData.trim().split('\n');
 
     let html = '';
 
-
-
-
     while (lines.length > 0) {
-
         let flag = false;
 
         let parserFunCodes = Object.keys(parserMap);
@@ -95,10 +130,7 @@ function coreTran(lineData, preToken) {
         if (!flag) {
             let string = lines[0];
             if (string.substr(0, 2) !== '//') {
-                html += coreRender({
-                    code: 's-txt',
-                    data: string
-                })
+                html += lineStyleCoreTran(string)
             }
             lines.shift()
         }
