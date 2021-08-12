@@ -6,19 +6,26 @@ let code = require("./plug/code");
 const parserMap = {}
 const innerFun = {}
 const renderMap = {}
-
+const lineStyleRenderMap = {}
 
 class Core {
     constructor() {
-        this.use(txt)
         this.use(line)
-        this.use(color)
         this.use(katex)
         this.use(code)
+
+        this.use(txt)
+        this.useLineStyle(color)
+
     }
 
-    useLineStyle(f){
-
+    useLineStyle(f) {
+        if (f.parser !== undefined) {
+            parserMap[f.code] = f.parser
+        }
+        f.render.map(render => {
+            lineStyleRenderMap[render.code] = render.fun
+        })
     }
 
     use(f) {
@@ -38,8 +45,18 @@ class Core {
 
 
 function coreRender(token) {
-    console.log('do render ::'+token.code)
+    if (token.code.substr(0, 2) === 'l-') {
+        return lineStyleRender(token)
+    }
+
+    console.log('do coreRender ::' + token.code)
     return renderMap[token.code](token, coreTran)
+}
+
+
+function lineStyleRender(token) {
+    console.log('do lineStyleRender ::' + token.code)
+    return lineStyleRenderMap[token.code](token, coreTran)
 }
 
 
@@ -47,6 +64,9 @@ function coreTran(lineData, preToken) {
     let lines = lineData.trim().split('\n');
 
     let html = '';
+
+
+
 
     while (lines.length > 0) {
 
@@ -74,7 +94,7 @@ function coreTran(lineData, preToken) {
         }
         if (!flag) {
             let string = lines[0];
-            if (string.substr(0,2)!=='//'){
+            if (string.substr(0, 2) !== '//') {
                 html += coreRender({
                     code: 's-txt',
                     data: string
