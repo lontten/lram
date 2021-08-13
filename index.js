@@ -4,6 +4,7 @@ let color = require("./plug/line/color");
 let green = require("./plug/line/green");
 let katex = require("./plug/katex");
 let code = require("./plug/code");
+let table = require("./plug/table");
 const parserMap = {}
 const innerFun = {}
 const renderMap = {}
@@ -16,6 +17,7 @@ class Core {
         this.use(line)
         this.use(katex)
         this.use(code)
+        this.use(table)
         this.use(txt)
 
         this.useLineStyle(color)

@@ -1,13 +1,10 @@
-let liness={
-    a:'ss'
+line='|aa|bb|'
+reg = /^\|([\s\S]*\|)+\s*$/
+//第一行匹配table
+if (!reg.test(line)) {
+    throw 'false'
 }
-line='//fdsaf# cc'
-let reg = /^#+ /
-console.log(reg.test(line))
 
-console.log('s'==="s")
-
-function h(s) {
-    lines=s
-    lines.a='sssssssss'
-}
+reg = /^\|(([\s\S]*?\|)+?)\s*$/
+let exec = reg.exec(line);
+console.log(JSON.stringify(exec))

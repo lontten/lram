@@ -2,10 +2,12 @@ let lram = require('../index');
 
 
 var t = `
-
 aaa
-hh #c ss #g ss
-bbb #g ss东方
+|ta|tb|
+| -: |-|
+|11|222|
+|111|2221 #g ss|
+bbb
  `
 let s = lram.lram.render(t)
 console.log("ssss-------------html-----")
