@@ -3,7 +3,7 @@ const plug = {
     code: "s-katex",
     parser: function (lines) {
         const arr = [];
-        let lineNum=0
+        let lineNum = 0
 
         let line = lines[0]
         if (line !== "$$") {
@@ -14,15 +14,17 @@ const plug = {
 
         let token = {}
         token.code = 's-katex'
-        token.data=''
+        token.data = ''
         while (true) {
             lines.shift()
             lineNum++
-
-
             if (lines.length === 0) {
-                break
+                return {
+                    line: 0
+                }
             }
+
+
             const line = lines[0]
 
             if (line.trim() === "$$") {
@@ -45,7 +47,8 @@ const plug = {
             code: "s-katex",
             subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
-                html= katex.renderToString(token.data, {
+                let html = ''
+                html = katex.renderToString(token.data, {
                     displayMode: true,
                     throwOnError: false
                 })
