@@ -124,24 +124,29 @@ const plug = {
                 console.log(JSON.stringify(token))
                 let colNum = token.colNum;
                 let rowNum = token.rowNum;
-                for (let i = 0; i < rowNum; i++) {
+
+                html += '<thead>'
+                html += '<tr>'
+                html += renderRow(token.data[0], colNum)
+                html += '</tr>'
+                html += '</thead>'
+
+                html += '<tbody>'
+                for (let i = 1; i < rowNum; i++) {
                     html += '<tr>'
-                    html += renderRow(token.data[i], rowNum === 0, colNum)
+                    html += renderRow(token.data[i], colNum)
                     html += '</tr>'
                 }
+                html += '</tbody>'
 
 
-                function renderRow(rows, head, len) {
-                    console.log('ren row :: ' + JSON.stringify(rows) + head + len)
+                function renderRow(rows, len) {
+                    console.log('ren row :: ' + JSON.stringify(rows) + len)
                     let html = '';
-                    if (head) {
-                        for (let k = 0; k < len; k++) {
-                            html += '<th>' + rows[k] + '</th>'
-                        }
-                    } else {
-                        for (let k = 0; k < len; k++) {
-                            html += '<td>' + rows[k] + '</td>'
-                        }
+
+                    for (let k = 0; k < len; k++) {
+                        html += '<td>' + rows[k] + '</td>'
+
                     }
                     return html
                 }
