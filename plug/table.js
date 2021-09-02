@@ -125,7 +125,7 @@ const plug = {
                 let colNum = token.colNum;
                 let rowNum = token.rowNum;
 
-                html += '<thead>'
+                html += '<thead class="table-success">'
                 html += '<tr>'
                 html += renderRow(token.data[0], colNum)
                 html += '</tr>'
@@ -151,7 +151,7 @@ const plug = {
                     return html
                 }
 
-                return '<table>' + html + '</table>'
+                return '<table class="table table-bordered">' + html + '</table>'
             },
         }
     ]
