@@ -10,7 +10,7 @@ npm i lram
 
 import 'katex/dist/katex.min.css'
 import 'highlight.js/styles/base16/railscasts.css'
-
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 ```
 
