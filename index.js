@@ -1,10 +1,14 @@
-let line = require("./plug/singeline/title");
-let txt = require("./plug/singeline/txt");
+let line = require("./plug/static/title");
+let txt = require("./plug/static/txt");
+
 let color = require("./plug/inline/color");
 let green = require("./plug/inline/green");
-let katex = require("./plug/multiline/katex");
-let code = require("./plug/multiline/code");
-let table = require("./plug/multiline/table");
+
+let katex = require("./plug/dynamic/katex");
+let code = require("./plug/dynamic/code");
+let table = require("./plug/dynamic/table");
+let img = require("./plug/static/img");
+
 const parserMap = {}
 const innerFun = {}
 const renderMap = {}
@@ -19,6 +23,7 @@ class Core {
         this.use(code)
         this.use(table)
         this.use(txt)
+        this.use(img)
 
         this.useLineStyle(color)
         this.useLineStyle(green)

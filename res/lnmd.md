@@ -32,12 +32,28 @@ sdfasddd :: tag java
 lsdjfalf.  ::link jsdfasfasfsdaffdfas
 
 img! [htjlsajdfl::/sadjflas]
-@img w40% 
+@img w45 h34% http://ss.jpg
+
+@img xx.jpg
+
+@img hello w45 h3% b
+xx.jpg
+
+
+@img
+http://ww.img.com/aa.jpg
+
+
+
+
+
 
 $$img n:wo w:40% h:50 f:l>>img.wo @img http://ss.img.com/sss.jpg
 $$lndv{{
 
 }}
+
+
 
 lsdfjljflajlfkajlfkja  @link>>dv
 
