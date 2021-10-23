@@ -14,7 +14,7 @@ import 'highlight.js/styles/base16/railscasts.css'
 
 ```
 
-### react + ts + func
+### react + func + ts
 
 ```jsx
 
@@ -44,3 +44,40 @@ export const Lram = (props: Props) => {
 }
 
 ```
+
+### use Lram
+````jsx
+
+let data=`
+line
+# h1
+## h2
+
+|  aa | bb | cc |
+|-|-:|:-|
+| 11 | 222 | 333 |
+| xxx | sss | www |
+
+
+```
+public void hello () {
+ string str = "hello world !";
+}
+```
+
+$$
+f(x)=\int_{-\infty}^\infty\widehat f\xi\,e^{2\pi i\xi x}\,d\xi
+$$
+
+`
+
+
+export const App = () => {
+ 
+    return (
+        <Lram data={data}/>
+    )
+}
+
+
+````

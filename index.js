@@ -55,7 +55,6 @@ function coreRender(token) {
         return lineStyleCoreTran(token.data)
     }
 
-    console.log('do coreRender ::' + token.code)
     return renderMap[token.code](token, coreTran)
 }
 
@@ -63,12 +62,10 @@ function coreRender(token) {
 function lineStyleCoreTran(line) {
     var i = 0
     let html = '';
-    console.log('do lineStyleCoreTran ::' + line)
     while (true) {
         let flag = false;
         for (let lineP of lineStyleParserArr) {
             let ds = lineP(line);
-            console.log("lst  ds ::" + JSON.stringify(ds))
             if (ds.match) {
                 flag = true
                 for (let token of ds.tokens) {
@@ -77,10 +74,8 @@ function lineStyleCoreTran(line) {
                         if (i === 3) {
                             throw '100'
                         }
-                        console.log('lst stxt ::' + JSON.stringify(token))
                         html += lineStyleCoreTran(token.data)
                     } else {
-                        console.log('lst  r map :: ' + JSON.stringify(token))
                         html += lineStyleRenderMap[token.code](token.data)
                     }
                 }
@@ -92,7 +87,6 @@ function lineStyleCoreTran(line) {
             break
         }
     }
-    console.log('lst  ::' + html)
     return html
 }
 
@@ -117,7 +111,6 @@ function coreTran(lineData, preToken) {
 
 
             const v = JSON.parse(JSON.stringify(lines));
-            console.log(JSON.stringify(v))
             let ds = parserMap[p](v);
 
             if (ds.line > 0) {

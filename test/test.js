@@ -10,5 +10,3 @@ aaa
 bbb
  `
 let s = lram.lram.render(t)
-console.log("ssss-------------html-----")
-console.log(s)

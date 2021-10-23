@@ -120,8 +120,6 @@ const plug = {
             subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
                 let html = ''
-                console.log("----------------------------------------------")
-                console.log(JSON.stringify(token))
                 let colNum = token.colNum;
                 let rowNum = token.rowNum;
 
@@ -141,7 +139,6 @@ const plug = {
 
 
                 function renderRow(rows, len) {
-                    console.log('ren row :: ' + JSON.stringify(rows) + len)
                     let html = '';
 
                     for (let k = 0; k < len; k++) {

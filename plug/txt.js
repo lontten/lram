@@ -4,7 +4,6 @@ const plug = {
             code: "s-txt",
             subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
-                console.log('txt render :: ' + token.data)
                 return tran(token.data, token)
             },
         }
