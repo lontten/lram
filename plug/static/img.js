@@ -21,7 +21,7 @@ const plug = {
 
 
         let line2 = lines[1];
-        if (line2.length<5){
+        if (line2.length < 5) {
             console.log('img data len < 5');
             return {
                 line: 0
@@ -29,7 +29,7 @@ const plug = {
         }
 
         let line3 = lines[1];
-        if (line3.trim()===""){
+        if (line3.trim() === "") {
             console.log('kong line err');
             return {
                 line: 0
@@ -56,9 +56,18 @@ const plug = {
             code: "s-img",
             subParserType: [],//解析后的数据可被这些类型继续解析
             fun: function (token, tran) {
-                let html = `<img src="${token.data["data"]}" alt="">`
+                let imgUrl = token.data["data"];
+                let altName=''
+                let imgName=''
+                let temp = `
+<figure class="figure">
+    <img src="${imgUrl}" alt="${altName}"
+         class="figure-img img-fluid rounded" >
+    <figcaption class="figure-caption">${imgName}</figcaption>
+</figure>
+`
 
-                return html
+                return temp
             },
         }
     ]
