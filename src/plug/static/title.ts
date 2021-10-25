@@ -34,7 +34,7 @@ export const titlePlug: Plug = {
         {
             code: "s-title",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token, ctx, tran) {
+            render: function (token, ctx, tran) {
                 console.log(ctx)
                 let n = token.data["num"];
                 const head = "<h" + n + '>';

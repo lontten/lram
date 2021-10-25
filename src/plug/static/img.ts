@@ -45,7 +45,7 @@ export const imgPlug :Plug= {
         {
             code: "s-img",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: (token: Token, ctx: any, tran: any) => {
+            render: (token: Token, ctx: any, tran: any) => {
                 console.log(ctx)
                 console.log(tran)
 

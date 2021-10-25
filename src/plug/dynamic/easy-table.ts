@@ -1,9 +1,9 @@
-import {Token} from "../../model/Token";
+import {TableToken, Token} from "../../model/Token";
 import {Parser, Plug} from "../../model/Parser";
 
 export const easyTablePlug: Plug = {
-    code: "s-easy-table",
-    parser: function (lines) {
+    code: "s-table",
+    parser: (lines) => {
         let tokens = new Array<Token>()
         let lineNum = 0
 
@@ -12,8 +12,7 @@ export const easyTablePlug: Plug = {
             return new Parser(0)
         }
 
-        let token = new Token('s-katex')
-        token.data = ''
+        let token = new TableToken('s-table')
         while (true) {
             lines.shift()
             lineNum++
@@ -28,27 +27,13 @@ export const easyTablePlug: Plug = {
                 lineNum++
                 break
             }
-            token.data += line;
         }
 
-        tokens.push(token)
+        tokens.push(token as Token)
 
         return new Parser(lineNum, tokens)
 
     },
-    render: [
-        {
-            code: "s-easy-table",
-            subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token, ctx, tran) {
-                let html = katex.renderToString(token.data, {
-                    displayMode: true,
-                    throwOnError: false
-                })
-                return html
-            },
-        }
-    ]
-
+    render: []
 };
 

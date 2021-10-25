@@ -1,7 +1,7 @@
 import {Parser, Plug} from "../../model/Parser";
-import {Token} from "../../model/Token";
+import {ComToken, Token} from "../../model/Token";
+import {highlightAuto} from "highlightjs";
 
-const hljs = require("highlight.js");
 export const codePlug: Plug = {
     code: 's-code',
     parser: function (lines) {
@@ -22,7 +22,7 @@ export const codePlug: Plug = {
             return new Parser(0)
         }
 
-        const token = new Token('s-code')
+        const token = new ComToken('s-code')
         token.data["type"] = exec[1]
         token.data['data'] = ''
         while (true) {
@@ -41,7 +41,7 @@ export const codePlug: Plug = {
             token.data['data'] += line + '\n';
         }
 
-        tokens.push(token)
+        tokens.push(token as Token)
 
         return new Parser(lineNum, tokens)
 
@@ -50,11 +50,11 @@ export const codePlug: Plug = {
         {
             code: "s-code",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token, ctx, tran) {
+            render: function (token, ctx, tran) {
                 console.log(ctx)
                 console.log(tran)
 
-                const highlightedCode = hljs.highlightAuto(token.data['data']).value
+                const highlightedCode = highlightAuto(token.data['data']).value
                 return '<pre><code class="hljs">' + highlightedCode + '</code></pre>'
             },
         }

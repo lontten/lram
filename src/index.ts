@@ -55,7 +55,7 @@ export class Core {
             this.parserMap[f.code] = f.parser
         }
         f.render.map(render => {
-            this.renderMap[render.code] = render.fun
+            this.renderMap[render.code] = render.render
             this.subParserMap[render.code] = render.subParserType
         })
     }

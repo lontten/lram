@@ -1,5 +1,5 @@
 import {Parser, Plug} from "../../model/Parser";
-import {Token} from "../../model/Token";
+import {TableToken, Token} from "../../model/Token";
 
 export const tablePlug: Plug = {
     code: "s-table",
@@ -61,12 +61,13 @@ export const tablePlug: Plug = {
             return new Parser(0)
         }
 
-        let token = new Token('s-table')
+        let token = new TableToken('s-table')
 
         token.colNum = tableColNum
         token.colType = colType
         token.rowNum = 1
 
+        // [][]string
         token.data[0] = oneLineHeadDatalist
 
         while (true) {
@@ -103,7 +104,7 @@ export const tablePlug: Plug = {
 
         }
 
-        tokens.push(token)
+        tokens.push(token as Token)
         return new Parser(lineNum, tokens)
 
 
@@ -112,9 +113,13 @@ export const tablePlug: Plug = {
         {
             code: "s-table",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token, ctx, tran) {
+            render: function (token, ctx, tran) {
+                console.log(ctx)
+                console.log(tran)
+
+
                 let html = ''
-                let colNum = token.colNum | 0;
+                let colNum = token.colNum;
                 let rowNum = token.rowNum;
 
                 html += '<thead class="table-success">'
@@ -132,15 +137,6 @@ export const tablePlug: Plug = {
                 html += '</tbody>'
 
 
-                function renderRow(rows, len) {
-                    let html = '';
-
-                    for (let k = 0; k < len; k++) {
-                        html += '<td>' + rows[k] + '</td>'
-
-                    }
-                    return html
-                }
 
                 return '<table class="table table-bordered">' + html + '</table>'
             },
@@ -149,3 +145,13 @@ export const tablePlug: Plug = {
 
 };
 
+
+function renderRow(rows: any, len: number) {
+    let html = '';
+
+    for (let k = 0; k < len; k++) {
+        html += '<td>' + rows[k] + '</td>'
+
+    }
+    return html
+}

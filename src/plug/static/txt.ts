@@ -9,7 +9,7 @@ export const txtPlug: Plug = {
         {
             code: "s-txt",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: (token: Token, ctx: any, tran: CoreTran) => {
+            render: (token: Token, ctx: any, tran: CoreTran) => {
                 console.log(ctx)
                 return tran(token.data as string, token)
             },

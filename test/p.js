@@ -1,3 +1,5 @@
-s=' #c sdfa sadfas #c dsafas sdfasdf'
-let strings = s.split('#c ');
-console.log(strings)
+"use strict";
+exports.__esModule = true;
+var Token_1 = require("../src/model/Token");
+var tokenTable = new Token_1.TokenTable('s');
+console.log(tokenTable);
