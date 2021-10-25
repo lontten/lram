@@ -1,27 +1,26 @@
-const katex = require('katex');
-const plug = {
+import {Parser, Plug} from "../../model/Parser";
+import {Token} from "../../model/Token";
+import {CoreTran} from "../../model/core";
+import {renderToString} from "katex";
+
+export const katexPlug: Plug = {
     code: "s-katex",
     parser: function (lines) {
-        const arr = [];
+        let tokens = new Array<Token>()
         let lineNum = 0
 
         let line = lines[0]
         if (line !== "$$") {
-            return {
-                line: 0
-            }
+            return new Parser(0)
         }
 
-        let token = {}
-        token.code = 's-katex'
+        let token = new Token('s-katex')
         token.data = ''
         while (true) {
             lines.shift()
             lineNum++
             if (lines.length === 0) {
-                return {
-                    line: 0
-                }
+                return new Parser(0)
             }
 
 
@@ -34,21 +33,21 @@ const plug = {
             token.data += line;
         }
 
-        arr.push(token)
+        tokens.push(token)
 
-        return {
-            line: lineNum,
-            tokens: arr
-        }
+        return new Parser(lineNum, tokens)
 
     },
     render: [
         {
             code: "s-katex",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token, ctx,tran) {
+            fun: function (token, ctx: any, tran: CoreTran) {
+                console.log(ctx)
+                console.log(tran)
+
                 let html = ''
-                html = katex.renderToString(token.data, {
+                html = renderToString(token.data as string, {
                     displayMode: true,
                     throwOnError: false
                 })
@@ -59,4 +58,3 @@ const plug = {
 
 };
 
-module.exports = plug

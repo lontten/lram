@@ -1,8 +1,11 @@
+import {Parser, Plug} from "../../model/Parser";
+import {Token} from "../../model/Token";
+
 const hljs = require("highlight.js");
-const plug = {
+export const codePlug: Plug = {
     code: 's-code',
     parser: function (lines) {
-        const arr = [];
+        let tokens = new Array<Token>()
         let lineNum = 0
 
         let line = lines[0]
@@ -10,27 +13,24 @@ const plug = {
 
         let reg = /^```/
         if (!reg.test(line)) {
-            return {
-                line: 0
-            }
+            return new Parser(0)
         }
 
         reg = /^```\s*([\w\W]*?)\s*$/
         let exec = reg.exec(line);
+        if (exec == null) {
+            return new Parser(0)
+        }
 
-        const token = {};
-        token.code = 's-code'
-        token.data = {}
+        const token = new Token('s-code')
         token.data["type"] = exec[1]
-        token.data['data']=''
+        token.data['data'] = ''
         while (true) {
             lines.shift()
             lineNum++
 
             if (lines.length === 0) {
-                return {
-                    line: 0
-                }
+                return new Parser(0)
             }
             const line = lines[0]
 
@@ -41,19 +41,19 @@ const plug = {
             token.data['data'] += line + '\n';
         }
 
-        arr.push(token)
+        tokens.push(token)
 
-        return {
-            line: lineNum,
-            tokens: arr
-        }
+        return new Parser(lineNum, tokens)
 
     },
     render: [
         {
             code: "s-code",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token,ctx, tran) {
+            fun: function (token, ctx, tran) {
+                console.log(ctx)
+                console.log(tran)
+
                 const highlightedCode = hljs.highlightAuto(token.data['data']).value
                 return '<pre><code class="hljs">' + highlightedCode + '</code></pre>'
             },
@@ -62,4 +62,3 @@ const plug = {
 
 };
 
-module.exports = plug

@@ -1,18 +1,18 @@
-const plug = {
+import {Token} from "../../model/Token";
+import {Parser, Plug} from "../../model/Parser";
+
+export const easyTablePlug: Plug = {
     code: "s-easy-table",
     parser: function (lines) {
-        const arr = [];
+        let tokens = new Array<Token>()
         let lineNum = 0
 
         let line = lines[0]
         if (line !== "$$") {
-            return {
-                line: 0
-            }
+            return new Parser(0)
         }
 
-        let token = {}
-        token.code = 's-katex'
+        let token = new Token('s-katex')
         token.data = ''
         while (true) {
             lines.shift()
@@ -31,20 +31,17 @@ const plug = {
             token.data += line;
         }
 
-        arr.push(token)
+        tokens.push(token)
 
-        return {
-            line: lineNum,
-            tokens: arr
-        }
+        return new Parser(lineNum, tokens)
 
     },
     render: [
         {
             code: "s-easy-table",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token,ctx, tran) {
-                html = katex.renderToString(token.data, {
+            fun: function (token, ctx, tran) {
+                let html = katex.renderToString(token.data, {
                     displayMode: true,
                     throwOnError: false
                 })
@@ -55,4 +52,3 @@ const plug = {
 
 };
 
-module.exports = plug

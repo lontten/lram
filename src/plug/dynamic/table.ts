@@ -1,16 +1,17 @@
-const plug = {
+import {Parser, Plug} from "../../model/Parser";
+import {Token} from "../../model/Token";
+
+export const tablePlug: Plug = {
     code: "s-table",
     parser: function (lines) {
-        const arr = [];
+        let tokens = new Array<Token>()
         let lineNum = 0
 
         let line = lines[0]
 
         let reg = /^\|([\s\S]*\|)+[\s\S]*$/;
         if (!reg.test(line)) {
-            return {
-                line: 0
-            }
+            return new Parser(0)
         }
 
 
@@ -30,18 +31,17 @@ const plug = {
         //第二行匹配table，失败
         if (!reg.test(twoLine)) {
             //无法匹配table模式
-            return {
-                line: 0
-            }
+            return new Parser(0)
         }
 
 
         //第二行匹配table成功，进入table模式
         let twoLineHeadDatalist = twoLine.split('|');
         twoLineHeadDatalist = twoLineHeadDatalist.slice(1, twoLineHeadDatalist.length - 1)
-        const colType = [];
-        twoLineHeadDatalist.forEach(value => {
-            switch (value.trim) {
+        const colType: number[] = []
+
+        for (let value of twoLineHeadDatalist) {
+            switch (value.trim()) {
                 case '-':
                     colType.push(1);
                     break
@@ -52,25 +52,21 @@ const plug = {
                     colType.push(3);
                     break
                 default:
-                    return {
-                        line: 0
-                    }
-            }
-        })
-
-
-        if (twoLineHeadDatalist.length !== tableColNum) {
-            return {
-                line: 0
+                    return new Parser(0)
             }
         }
 
-        let token = {}
-        token.code = 's-table'
+
+        if (twoLineHeadDatalist.length !== tableColNum) {
+            return new Parser(0)
+        }
+
+        let token = new Token('s-table')
+
         token.colNum = tableColNum
         token.colType = colType
         token.rowNum = 1
-        token.data = []
+
         token.data[0] = oneLineHeadDatalist
 
         while (true) {
@@ -107,20 +103,18 @@ const plug = {
 
         }
 
-        arr.push(token)
-        return {
-            line: lineNum,
-            tokens: arr
-        }
+        tokens.push(token)
+        return new Parser(lineNum, tokens)
+
 
     },
     render: [
         {
             code: "s-table",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token,ctx, tran) {
+            fun: function (token, ctx, tran) {
                 let html = ''
-                let colNum = token.colNum;
+                let colNum = token.colNum | 0;
                 let rowNum = token.rowNum;
 
                 html += '<thead class="table-success">'
@@ -155,4 +149,3 @@ const plug = {
 
 };
 
-module.exports = plug

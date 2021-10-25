@@ -1,4 +1,4 @@
-import { helloWorld } from './../src'
+import { helloWorld } from '../src'
 import { expect } from 'chai'
 
 describe('helloWorld', () => {

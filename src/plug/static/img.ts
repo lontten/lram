@@ -1,64 +1,57 @@
-const katex = require('katex');
-const plug = {
+import {Token} from "../../model/Token";
+import {Parser, Plug} from "../../model/Parser";
+
+export const imgPlug :Plug= {
     code: "s-img",
-    parser: function (lines) {
-        const arr = [];
+    parser: (lines) => {
+        let tokens = new Array<Token>();
+
 
         if (lines.length < 2) {
             console.log('len < 2');
-            return {
-                line: 0
-            }
+            return new Parser(0);
         }
 
         let line = lines[0]
         if (line !== "@img") {
             console.log('!= @img');
-            return {
-                line: 0
-            }
+            return new Parser(0);
         }
 
 
         let line2 = lines[1];
         if (line2.length < 5) {
             console.log('img data len < 5');
-            return {
-                line: 0
-            }
+            return new Parser(0);
         }
 
         let line3 = lines[1];
         if (line3.trim() === "") {
             console.log('kong line err');
-            return {
-                line: 0
-            }
+            return new Parser(0);
         }
 
-        let token = {}
-        token.code = 's-img'
-        token.data = {}
+        let token = new Token('s-img');
         token.data["data"] = line2
 
 
+        tokens.push(token)
 
-        arr.push(token)
 
-        return {
-            line: 3,
-            tokens: arr
-        }
+        return new Parser(3,tokens);
 
     },
     render: [
         {
             code: "s-img",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token,ctx, tran) {
+            fun: (token: Token, ctx: any, tran: any) => {
+                console.log(ctx)
+                console.log(tran)
+
                 let imgUrl = token.data["data"];
-                let altName=''
-                let imgName=''
+                let altName = ''
+                let imgName = ''
                 let temp = `
 <figure class="figure">
     <img src="${imgUrl}" alt="${altName}"
@@ -74,4 +67,3 @@ const plug = {
 
 };
 
-module.exports = plug

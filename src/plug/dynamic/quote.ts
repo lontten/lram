@@ -1,19 +1,20 @@
-const plug = {
+import {Token} from "../../model/Token";
+import {Parser, Plug} from "../../model/Parser";
+import {renderToString} from "katex";
+
+export const quotePlug: Plug = {
     code: "s-quote", //引用
     parser: function (lines) {
-        const arr = [];
-        let lineNum=0
+        let tokens = new Array<Token>()
+        let lineNum = 0
 
         let line = lines[0]
         if (line !== "$$") {
-            return {
-                line: 0
-            }
+            return new Parser(0)
         }
 
-        let token = {}
-        token.code = 's-katex'
-        token.data=''
+        let token = new Token('s-katex')
+        token.data = ''
         while (true) {
             lines.shift()
             lineNum++
@@ -31,20 +32,19 @@ const plug = {
             token.data += line;
         }
 
-        arr.push(token)
+        tokens.push(token)
 
-        return {
-            line: lineNum,
-            tokens: arr
-        }
-
+        return new Parser(lineNum, tokens)
     },
     render: [
         {
             code: "s-quote",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token,ctx, tran) {
-                html= katex.renderToString(token.data, {
+            fun: function (token, ctx, tran) {
+                console.log(ctx)
+                console.log(tran)
+
+                let html = renderToString(token.data as string, {
                     displayMode: true,
                     throwOnError: false
                 })
@@ -55,4 +55,3 @@ const plug = {
 
 };
 
-module.exports = plug

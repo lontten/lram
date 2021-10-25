@@ -1,30 +1,26 @@
-const plug = {
+import {Token} from "../../model/Token";
+import {InlineParser, InlinePlug} from "../../model/InlineParser";
+
+export const greenPlug: InlinePlug = {
     parser: function (line) {
-        const arr = [];
+        let tokens = new Array<Token>()
 
         let split = line.split('#g ');
-        if (split.length===1){
-            return {
-                match:false
-            }
+        if (split.length === 1) {
+            return new InlineParser(false)
         }
 
-        let token = {}
-        token.code = "s-txt"
+        let token = new Token("s-txt")
         token.data = split[0]
-        arr.push(token)
+        tokens.push(token)
 
         split.splice(0, 1)
         split.map(k => {
-            let token = {}
-            token.code = "l-green"
+            let token = new Token("l-green")
             token.data = k
-            arr.push(token)
+            tokens.push(token)
         })
-        return {
-            match: true,
-            tokens: arr
-        }
+        return new InlineParser(true, tokens)
 
     },
     render: [
@@ -39,4 +35,3 @@ const plug = {
 
 };
 
-module.exports = plug
