@@ -55,7 +55,7 @@ const plug = {
         {
             code: "s-img",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token, tran) {
+            fun: function (token,ctx, tran) {
                 let imgUrl = token.data["data"];
                 let altName=''
                 let imgName=''

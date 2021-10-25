@@ -53,7 +53,7 @@ const plug = {
         {
             code: "s-code",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token, tran) {
+            fun: function (token,ctx, tran) {
                 const highlightedCode = hljs.highlightAuto(token.data['data']).value
                 return '<pre><code class="hljs">' + highlightedCode + '</code></pre>'
             },

@@ -3,7 +3,7 @@ const plug = {
         {
             code: "s-txt",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token, tran) {
+            fun: function (token,ctx, tran) {
                 return tran(token.data, token)
             },
         }

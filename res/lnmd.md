@@ -32,7 +32,33 @@ sdfasddd :: tag java
 lsdjfalf.  ::link jsdfasfasfsdaffdfas
 
 img! [htjlsajdfl::/sadjflas]
-@img w45 h34% http://ss.jpg
+
+
+@img 1.jpg w45 h34% xx
+http://ss.jpg
+@img-info 
+kajdfksaldjfkldsajfads
+dajfkldsajfklasdjfa
+asdjfklsajfklsafj
+sjdafkldsajfklasdjf
+sajdfkldsajkfa
+jsdaklfasdlkjfaskl
+
+
+@img
+dafasf
+@img.info
+aslkjfdklasjf
+@img.img
+sldjfklsa
+@img.info
+jksadjfla
+@img.space 2
+@img.img
+jsadljkf
+
+
+
 
 @img xx.jpg
 

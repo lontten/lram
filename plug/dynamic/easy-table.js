@@ -43,7 +43,7 @@ const plug = {
         {
             code: "s-easy-table",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            fun: function (token, tran) {
+            fun: function (token,ctx, tran) {
                 html = katex.renderToString(token.data, {
                     displayMode: true,
                     throwOnError: false

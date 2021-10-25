@@ -55,12 +55,12 @@ class Core {
 }
 
 
-function coreRender(token) {
+function coreRender(token, context) {
     if (token.code === 's-txt') {
         return lineStyleCoreTran(token.data)
     }
 
-    return renderMap[token.code](token, coreTran)
+    return renderMap[token.code](token, context, coreTran)
 }
 
 
@@ -121,6 +121,16 @@ function coreTran(lineData, preToken) {
             if (ds.line > 0) {
                 flag = true
                 lines.splice(0, ds.line)
+
+
+                for (let i = 0; i < ds.tokens.length; i++) {
+                    let token = ds.tokens[i]
+                    let tokenNav = null
+                    if (i > 0) {
+                        tokenNav = ds.tokens[i - 1]
+                    }
+                    html += coreRender(token, tokenNav)
+                }
                 ds.tokens.map(token => {
                     html += coreRender(token)
                 })
