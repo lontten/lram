@@ -1,4 +1,4 @@
-import {ComToken, Token} from "./model/Token";
+import {ComToken, ImgGroupDto, Token} from "./model/Token";
 import {Parser, ParserFun, Plug, RenderFun} from "./model/Parser";
 import {InlineParserFun, InlinePlug, InlineRenderFun} from "./model/InlineParser";
 import {codePlug} from "./plug/dynamic/code";
@@ -17,6 +17,11 @@ let renderMap = new Map<string, RenderFun>()
 
 let inlineParserArr = new Array<InlineParserFun>()
 let inlineRenderMap = new Map<string, InlineRenderFun>()
+
+
+let imgTagMap=new Map<string,ImgGroupDto>()
+let aliasMap=new Map<string,string>()
+
 
 export class Core {
     constructor() {
