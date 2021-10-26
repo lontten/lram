@@ -18,7 +18,7 @@ export class Parser {
 
 export interface Plug {
     code: string
-    parser: ParserFun
+    parser?: ParserFun
     render: Array<PlugRender>
 }
 

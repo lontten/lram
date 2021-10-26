@@ -26,8 +26,7 @@ import 'katex/dist/katex.min.css'
 import 'highlight.js/styles/base16/railscasts.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-type
-Props = {data: string};
+type Props = { data: string };
 
 export const Lram = (props: Props) => {
     const [html, setHtml] = useState('')
@@ -65,11 +64,8 @@ line
 
 
 ```
-public
-void hello()
-{
-    string
-    str = "hello world !";
+public void hello () {
+ string str = "hello world !";
 }
 ```
 

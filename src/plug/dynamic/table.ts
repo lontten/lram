@@ -104,7 +104,7 @@ export const tablePlug: Plug = {
 
         }
 
-        tokens.push(token as Token)
+        tokens.push(token)
         return new Parser(lineNum, tokens)
 
 
@@ -113,9 +113,8 @@ export const tablePlug: Plug = {
         {
             code: "s-table",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            render: function (token, ctx, tran) {
-                console.log(ctx)
-                console.log(tran)
+            render: function (t, _ctx, _tran) {
+                let token = t as TableToken
 
 
                 let html = ''
@@ -135,7 +134,6 @@ export const tablePlug: Plug = {
                     html += '</tr>'
                 }
                 html += '</tbody>'
-
 
 
                 return '<table class="table table-bordered">' + html + '</table>'

@@ -26,4 +26,4 @@ export class TableToken {
     public data: string[][]
 }
 
-export type Token = ComToken & TableToken
+export type Token = ComToken | TableToken

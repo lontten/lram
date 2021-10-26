@@ -1,5 +1,5 @@
 import {Parser, Plug} from "../../model/Parser";
-import {Token} from "../../model/Token";
+import {ComToken, Token} from "../../model/Token";
 
 export const titlePlug: Plug = {
     code: "s-title",
@@ -22,7 +22,7 @@ export const titlePlug: Plug = {
         let data = exec[2];
 
 
-        let token = new Token('s-title');
+        let token = new ComToken('s-title');
         token.data["num"] = head.length - 1
         token.data['data'] = data
         tokens.push(token)
@@ -34,8 +34,7 @@ export const titlePlug: Plug = {
         {
             code: "s-title",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            render: function (token, ctx, tran) {
-                console.log(ctx)
+            render: function (token, _ctx, tran) {
                 let n = token.data["num"];
                 const head = "<h" + n + '>';
                 const end = "</h" + n + '>';

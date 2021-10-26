@@ -32,7 +32,7 @@ export const quotePlug: Plug = {
             token.data += line;
         }
 
-        tokens.push(token as Token)
+        tokens.push(token)
 
         return new Parser(lineNum, tokens)
     },

@@ -8,28 +8,16 @@ export const easyTablePlug: Plug = {
         let lineNum = 0
 
         let line = lines[0]
-        if (line !== "$$") {
+        console.log(line);
+        if (true) {
             return new Parser(0)
         }
 
         let token = new TableToken('s-table')
-        while (true) {
-            lines.shift()
-            lineNum++
 
 
-            if (lines.length === 0) {
-                break
-            }
-            const line = lines[0]
 
-            if (line.trim() === "$$") {
-                lineNum++
-                break
-            }
-        }
-
-        tokens.push(token as Token)
+        tokens.push(token)
 
         return new Parser(lineNum, tokens)
 

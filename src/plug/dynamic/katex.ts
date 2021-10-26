@@ -32,7 +32,7 @@ export const katexPlug: Plug = {
             token.data += line;
         }
 
-        tokens.push(token as Token)
+        tokens.push(token)
 
         return new Parser(lineNum, tokens)
 
@@ -41,9 +41,7 @@ export const katexPlug: Plug = {
         {
             code: "s-katex",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            render: function (token, ctx: any, tran: CoreTran) {
-                console.log(ctx)
-                console.log(tran)
+            render: function (token, _ctx: any, _tran: CoreTran) {
 
                 let html = ''
                 html = renderToString(token.data as string, {

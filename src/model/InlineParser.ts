@@ -21,10 +21,11 @@ export interface InlinePlug {
 }
 
 export type InlineParserFun = (lines: string) => InlineParser
+export type InlineRenderFun = (token: string, ctx: any, tran: any) => string
 
 
 export interface InlinePlugRender {
     code: string
     subParserType: Array<string>//解析后的数据可被这些类型继续解析
-    fun: (token: string, ctx: any, tran: any) => string
+    render: InlineRenderFun
 }
