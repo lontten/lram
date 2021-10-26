@@ -21,6 +21,8 @@ let inlineRenderMap = new Map<string, InlineRenderFun>()
 
 let imgTagMap=new Map<string,ImgGroupDto>()
 let aliasMap=new Map<string,string>()
+console.log(imgTagMap)
+console.log(aliasMap)
 
 
 export class Core {
