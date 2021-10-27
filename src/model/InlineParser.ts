@@ -1,6 +1,5 @@
-import {Token, IToken} from "./token/token";
-import {TableToken} from "./token/tableToken";
-import {ImgToken} from "./token/imgToken";
+import {IToken, ITokenType} from "./token/token";
+import {CoreTran} from "./core";
 
 
 export class InlineParser {
@@ -8,7 +7,7 @@ export class InlineParser {
         this.match = match
     }
 
-    add(t: Token | TableToken | ImgToken | Array<IToken>): InlineParser {
+    add(t: ITokenType): InlineParser {
         if (t instanceof Array) {
             this.tokens.push(...t)
         } else {
@@ -35,7 +34,7 @@ export interface InlinePlug {
 }
 
 export type InlineParserFun = (lines: string) => InlineParser
-export type InlineRenderFun = (token: string, ctx: any, tran: any) => string
+export type InlineRenderFun = (token: string, ctx: any, tran: CoreTran) => string
 
 
 export interface InlinePlugRender {

@@ -1,14 +1,12 @@
-import {Token, IToken} from "./token/token";
+import {IToken, ITokenType} from "./token/token";
 import {CoreTran} from "./core";
-import {TableToken} from "./token/tableToken";
-import {ImgToken} from "./token/imgToken";
 
 export class Parser {
     constructor(num: number) {
         this.line = num
     }
 
-    add(t: Token | TableToken | ImgToken | Array<IToken>): Parser {
+    add(t: ITokenType): Parser {
         if (t instanceof Array) {
             this.tokens.push(...t)
         } else {

@@ -12,3 +12,4 @@ export class Token {
 }
 
 export type IToken = Token & TableToken & ImgToken & QuoteToken
+export type ITokenType = Token | TableToken | ImgToken | QuoteToken | Array<IToken>
