@@ -19,13 +19,13 @@ let inlineParserArr = new Array<InlineParserFun>()
 let inlineRenderMap = new Map<string, InlineRenderFun>()
 
 
-let imgTagMap=new Map<string,ImgGroupDto>()
-let aliasMap=new Map<string,string>()
+let imgTagMap = new Map<string, ImgGroupDto>()
+let aliasMap = new Map<string, string>()
 console.log(imgTagMap)
 console.log(aliasMap)
 
 
-export class Core {
+export class Lram {
     constructor() {
         this.use(titlePlug)
         this.use(katexPlug)
@@ -59,7 +59,7 @@ export class Core {
     }
 
     render(str: string) {
-        return coreTran(str, new Token('init'))
+        return coreTran(str, new Token('init') as IToken)
     }
 
 
@@ -156,3 +156,4 @@ function coreTran(lineData: string, preToken: IToken) {
 export const helloWorld = () => {
     return 'Howdy!'
 }
+export const lram=new Lram()

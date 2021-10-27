@@ -1,4 +1,4 @@
-import {Core} from "../src";
+import {Lram} from "../src";
 
 
 const t = `
@@ -20,6 +20,6 @@ int i=2;
 | a | b |
 | a | b |
  `;
-let core = new Core();
+let core = new Lram();
 let s = core.render(t);
 console.log(s);

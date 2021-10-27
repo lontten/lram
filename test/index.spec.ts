@@ -1,4 +1,4 @@
-import {Core, helloWorld} from '../src'
+import {helloWorld, lram} from '../src'
 import { expect } from 'chai'
 
 describe('helloWorld', () => {
@@ -10,7 +10,6 @@ describe('helloWorld', () => {
 
 describe('do render',()=>{
     it('should return h1', function () {
-        let core = new Core();
 
         var t = `
 ## a
@@ -36,7 +35,7 @@ int i=2;
 | a | b |
 | a | b |
  `
-        let s = core.render(t);
+        let s = lram.render(t);
         console.log(s)
     });
 })
