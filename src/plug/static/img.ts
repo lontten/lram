@@ -1,5 +1,6 @@
-import {Token, IToken} from "../../model/token/token";
+import {Token} from "../../model/token/token";
 import {Parser, Plug} from "../../model/Parser";
+import {ImgToken} from "../../model/token/imgToken";
 
 export const imgPlug :Plug= {
     code: "s-img",
@@ -40,7 +41,10 @@ export const imgPlug :Plug= {
         {
             code: "s-img",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            render: (token: IToken, _ctx: any, _tran: any) => {
+            render: (t, _ctx, _tran) => {
+                let token = t as ImgToken;
+
+
 
                 let imgUrl = token.data["data"];
                 let altName = ''

@@ -11,5 +11,5 @@ export class Token {
     public data: Map<string, any> | string = new Map<string, any>()
 }
 
-export type IToken = Token & TableToken & ImgToken & QuoteToken
+export type IToken = Token | TableToken | ImgToken | QuoteToken
 export type ITokenType = Token | TableToken | ImgToken | QuoteToken | Array<IToken>

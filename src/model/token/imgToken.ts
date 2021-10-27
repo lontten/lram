@@ -1,26 +1,28 @@
-
 export class ImgToken {
     constructor(code: string) {
         this.code = code
     }
 
-    add(dto: ImgDto | ImgGroupDto) {
-        this.data.push(dto as ImgDiv)
+    add(dto: ImgType) {
+        this.data.push(dto)
     }
 
 
     public code: string
     //图片组排列 h:水平 v:竖直
-    public imgDire: string = 'h'
+    public imgDirection: string = 'h'
 
-    public data: Array<ImgDiv> = new Array<ImgDiv>()
+    //图片介绍位置 left:左 center:中 right:右
+    public imgPos: string = 'left'
+
+    public data: Array<ImgType> = new Array<ImgType>()
 }
 
 export class ImgDto {
     public imgName: string = ''
     public imgUrl: string = ''
     //图片介绍位置 left:左 center:中 right:右
-    public imgDire: string = 'left'
+    public imgPos: string = 'left'
 
     public imgWNum: number = 0
     public imgWPoint: number = 0
@@ -30,17 +32,21 @@ export class ImgDto {
 
     public imgInfo: string = ''
     //图片介绍位置 left.start:上 right.center:中 end:下
-    public imgInfoDire: string = 'right.end'
+    public imgInfoPos: string = 'right.end'
 
+}
+
+export class ImgSpaceDto {
+    public num: number = 0
 }
 
 export class ImgGroupDto {
     //图片组排列 h:水平 v:竖直
     public imgDire: string = 'h'
 
-    public imgList: Array<ImgDto> = new Array<ImgDto>()
+    public imgList: Array<ImgType> = new Array<ImgType>()
 
 }
 
-export type ImgDiv = ImgDto & ImgGroupDto
+export type ImgType = ImgDto | ImgSpaceDto | ImgGroupDto
 
