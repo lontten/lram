@@ -21,19 +21,14 @@ export class ImgToken {
 export class ImgDto {
     public imgName: string = ''
     public imgUrl: string = ''
-    //图片介绍位置 left:左 center:中 right:右
-    public imgPos: string = 'left'
-
-    public imgWNum: number = 0
-    public imgWPoint: number = 0
-
-    public imgHNum: number = 0
-    public imgHPoint: number = 0
-
     public imgInfo: string = ''
     //图片介绍位置 left.start:上 right.center:中 end:下
     public imgInfoPos: string = 'right.end'
 
+    public imgWNum: number = 0
+    public imgWPoint: number = 0
+    public imgHNum: number = 0
+    public imgHPoint: number = 0
 }
 
 export class ImgSpaceDto {
@@ -43,6 +38,8 @@ export class ImgSpaceDto {
 export class ImgGroupDto {
     //图片组排列 h:水平 v:竖直
     public imgDire: string = 'h'
+    //图片介绍位置 left:左 center:中 right:右
+    public imgPos: string = 'left'
 
     public imgList: Array<ImgType> = new Array<ImgType>()
 
