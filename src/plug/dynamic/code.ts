@@ -1,11 +1,11 @@
 import {Parser, Plug} from "../../model/Parser";
-import {ComToken, Token} from "../../model/Token";
+import {Token} from "../../model/Token";
 import hljs from 'highlight.js';
 
 export const codePlug: Plug = {
     code: 's-code',
     parser: function (lines) {
-        let tokens = new Array<Token>()
+        let parser = new Parser(0);
         let lineNum = 0
 
         let line = lines[0]
@@ -13,16 +13,16 @@ export const codePlug: Plug = {
 
         let reg = /^```/
         if (!reg.test(line)) {
-            return new Parser(0)
+            return parser
         }
 
         reg = /^```\s*([\w\W]*?)\s*$/
         let exec = reg.exec(line);
         if (exec == null) {
-            return new Parser(0)
+            return parser
         }
 
-        const token = new ComToken('s-code')
+        const token = new Token('s-code')
         token.data["type"] = exec[1]
         token.data['data'] = ''
         while (true) {
@@ -30,7 +30,7 @@ export const codePlug: Plug = {
             lineNum++
 
             if (lines.length === 0) {
-                return new Parser(0)
+                return parser
             }
             const line = lines[0]
 
@@ -41,9 +41,9 @@ export const codePlug: Plug = {
             token.data['data'] += line + '\n';
         }
 
-        tokens.push(token)
+        parser.add(token)
 
-        return new Parser(lineNum, tokens)
+        return parser.set(lineNum)
 
     },
     render: [

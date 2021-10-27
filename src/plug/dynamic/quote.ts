@@ -1,19 +1,19 @@
-import {ComToken, Token} from "../../model/Token";
+import {Token} from "../../model/Token";
 import {Parser, Plug} from "../../model/Parser";
 import {renderToString} from "katex";
 
 export const quotePlug: Plug = {
     code: "s-quote", //引用
     parser: function (lines) {
-        let tokens = new Array<Token>()
+        let parser = new Parser(0);
         let lineNum = 0
 
         let line = lines[0]
         if (line !== "$$") {
-            return new Parser(0)
+            return parser
         }
 
-        let token = new ComToken('s-katex')
+        let token = new Token('s-katex')
         token.data = ''
         while (true) {
             lines.shift()
@@ -32,9 +32,9 @@ export const quotePlug: Plug = {
             token.data += line;
         }
 
-        tokens.push(token)
+        parser.add(token)
 
-        return new Parser(lineNum, tokens)
+        return parser.set(lineNum)
     },
     render: [
         {

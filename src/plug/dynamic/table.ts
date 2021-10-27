@@ -1,17 +1,17 @@
 import {Parser, Plug} from "../../model/Parser";
-import {TableToken, Token} from "../../model/Token";
+import {TableToken} from "../../model/Token";
 
 export const tablePlug: Plug = {
     code: "s-table",
     parser: function (lines) {
-        let tokens = new Array<Token>()
+        let parser = new Parser(0);
         let lineNum = 0
 
         let line = lines[0]
 
         let reg = /^\|([\s\S]*\|)+[\s\S]*$/;
         if (!reg.test(line)) {
-            return new Parser(0)
+            return parser
         }
 
 
@@ -31,7 +31,7 @@ export const tablePlug: Plug = {
         //第二行匹配table，失败
         if (!reg.test(twoLine)) {
             //无法匹配table模式
-            return new Parser(0)
+            return parser
         }
 
 
@@ -52,13 +52,13 @@ export const tablePlug: Plug = {
                     colType.push(3);
                     break
                 default:
-                    return new Parser(0)
+                    return parser
             }
         }
 
 
         if (twoLineHeadDatalist.length !== tableColNum) {
-            return new Parser(0)
+            return parser
         }
 
         let token = new TableToken('s-table')
@@ -104,8 +104,8 @@ export const tablePlug: Plug = {
 
         }
 
-        tokens.push(token)
-        return new Parser(lineNum, tokens)
+        parser.add(token)
+        return parser.set(lineNum)
 
 
     },

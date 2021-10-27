@@ -1,4 +1,4 @@
-import {ComToken, ImgGroupDto, Token} from "./model/Token";
+import {Token, ImgGroupDto, IToken} from "./model/Token";
 import {Parser, ParserFun, Plug, RenderFun} from "./model/Parser";
 import {InlineParserFun, InlinePlug, InlineRenderFun} from "./model/InlineParser";
 import {codePlug} from "./plug/dynamic/code";
@@ -59,7 +59,7 @@ export class Core {
     }
 
     render(str: string) {
-        return coreTran(str, new ComToken('init'))
+        return coreTran(str, new Token('init'))
     }
 
 
@@ -98,7 +98,7 @@ function inlineCoreTran(line: string) {
 }
 
 
-function coreRender(token: Token, context: any) {
+function coreRender(token: IToken, context: any) {
     if (token.code === 's-txt') {
         return inlineCoreTran(token.data as string)
     }
@@ -107,7 +107,7 @@ function coreRender(token: Token, context: any) {
 }
 
 
-function coreTran(lineData: string, preToken: Token) {
+function coreTran(lineData: string, preToken: IToken) {
     if (preToken.code === 's-txt') {
         return inlineCoreTran(lineData)
     }

@@ -1,6 +1,6 @@
 import {Plug} from "../../model/Parser";
 import {CoreTran} from "../../model/core";
-import {Token} from "../../model/Token";
+import {IToken} from "../../model/Token";
 
 export const txtPlug: Plug = {
     code:'',
@@ -8,7 +8,7 @@ export const txtPlug: Plug = {
         {
             code: "s-txt",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            render: (token: Token, _ctx: any, tran: CoreTran) => {
+            render: (token: IToken, _ctx: any, tran: CoreTran) => {
                 return tran(token.data as string, token)
             },
         }

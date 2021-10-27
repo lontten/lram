@@ -1,4 +1,4 @@
-export class ComToken {
+export class Token {
     constructor(code: string) {
         this.code = code
     }
@@ -67,4 +67,4 @@ export class ImgGroupDto {
 export type ImgDiv = ImgDto & ImgGroupDto
 
 
-export type Token = ComToken | TableToken | ImgToken
+export type IToken = Token & TableToken & ImgToken

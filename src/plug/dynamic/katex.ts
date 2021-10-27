@@ -1,26 +1,26 @@
 import {Parser, Plug} from "../../model/Parser";
-import {ComToken, Token} from "../../model/Token";
+import {Token} from "../../model/Token";
 import {CoreTran} from "../../model/core";
 import {renderToString} from "katex";
 
 export const katexPlug: Plug = {
     code: "s-katex",
     parser: function (lines) {
-        let tokens = new Array<Token>()
+        let parser = new Parser(0);
         let lineNum = 0
 
         let line = lines[0]
         if (line !== "$$") {
-            return new Parser(0)
+            return parser
         }
 
-        let token = new ComToken('s-katex')
+        let token = new Token('s-katex')
         token.data = ''
         while (true) {
             lines.shift()
             lineNum++
             if (lines.length === 0) {
-                return new Parser(0)
+                return parser
             }
 
             const line = lines[0]
@@ -32,9 +32,8 @@ export const katexPlug: Plug = {
             token.data += line;
         }
 
-        tokens.push(token)
-
-        return new Parser(lineNum, tokens)
+        parser.add(token)
+        return parser.set(lineNum)
 
     },
     render: [

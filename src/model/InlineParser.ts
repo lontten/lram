@@ -1,17 +1,29 @@
-import {Token} from "./Token";
+import {Token, ImgToken, TableToken, IToken} from "./Token";
+
 
 export class InlineParser {
-    constructor(match: boolean, tokens?: Array<Token>) {
+    constructor(match: boolean) {
         this.match = match
-        if (tokens) {
-            this.tokens = tokens
-        } else {
-            this.tokens = new Array<Token>()
-        }
     }
 
+    add(t: Token | TableToken | ImgToken | Array<IToken>): InlineParser {
+        if (t instanceof Array) {
+            this.tokens.push(...t)
+        } else {
+            this.tokens.push(t as IToken)
+        }
+        return this
+    }
+
+
+    set(match: boolean): InlineParser {
+        this.match = match
+        return this
+    }
+
+
     public match: boolean
-    public tokens: Array<Token>
+    public tokens: Array<IToken> = new Array<IToken>()
 }
 
 

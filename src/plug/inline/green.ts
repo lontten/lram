@@ -1,26 +1,27 @@
-import {ComToken, Token} from "../../model/Token";
+import {Token} from "../../model/Token";
 import {InlineParser, InlinePlug} from "../../model/InlineParser";
 
 export const greenPlug: InlinePlug = {
     parser: function (line) {
-        let tokens = new Array<Token>()
+        let parser = new InlineParser(false);
 
         let split = line.split('#g ');
         if (split.length === 1) {
-            return new InlineParser(false)
+            return parser
         }
 
-        let token = new ComToken("s-txt")
+        let token = new Token("s-txt")
         token.data = split[0]
-        tokens.push(token)
+        parser.add(token)
 
         split.splice(0, 1)
         split.map(k => {
-            let token = new ComToken("l-green")
+            let token = new Token("l-green")
             token.data = k
-            tokens.push(token)
+            parser.add(token)
         })
-        return new InlineParser(true, tokens)
+
+        return parser.set(true)
 
     },
     render: [
