@@ -1,5 +1,5 @@
 import {Parser, Plug} from "../../model/Parser";
-import {Token} from "../../model/Token";
+import {Token} from "../../model/token/token";
 import hljs from 'highlight.js';
 
 export const codePlug: Plug = {

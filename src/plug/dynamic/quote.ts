@@ -1,4 +1,4 @@
-import {Token} from "../../model/Token";
+import {Token} from "../../model/token/token";
 import {Parser, Plug} from "../../model/Parser";
 import {renderToString} from "katex";
 

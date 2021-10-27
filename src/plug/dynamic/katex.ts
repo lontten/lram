@@ -1,5 +1,5 @@
 import {Parser, Plug} from "../../model/Parser";
-import {Token} from "../../model/Token";
+import {Token} from "../../model/token/token";
 import {CoreTran} from "../../model/core";
 import {renderToString} from "katex";
 

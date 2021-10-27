@@ -1,4 +1,6 @@
-import {Token, ImgToken, TableToken, IToken} from "./Token";
+import {Token, IToken} from "./token/token";
+import {TableToken} from "./token/tableToken";
+import {ImgToken} from "./token/imgToken";
 
 
 export class InlineParser {

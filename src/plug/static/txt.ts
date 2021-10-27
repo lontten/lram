@@ -1,6 +1,6 @@
 import {Plug} from "../../model/Parser";
 import {CoreTran} from "../../model/core";
-import {IToken} from "../../model/Token";
+import {IToken} from "../../model/token/token";
 
 export const txtPlug: Plug = {
     code:'',

@@ -1,4 +1,4 @@
-import {ImgToken, TableToken} from "../src/model/Token";
+import {ImgToken, TableToken} from "../src/model/token/token";
 import {Token} from "../dist/model/Token";
 
 let tokenTable = new TableToken('s');

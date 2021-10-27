@@ -1,4 +1,4 @@
-import {Token, IToken} from "../../model/Token";
+import {Token, IToken} from "../../model/token/token";
 import {Parser, Plug} from "../../model/Parser";
 
 export const imgPlug :Plug= {

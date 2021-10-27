@@ -1,5 +1,5 @@
 import {Parser, Plug} from "../../model/Parser";
-import {TableToken} from "../../model/Token";
+import {TableToken} from "../../../dist/model/Token";
 
 export const tablePlug: Plug = {
     code: "s-table",

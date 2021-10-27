@@ -1,5 +1,7 @@
-import {Token, ImgToken, TableToken, IToken} from "./Token";
+import {Token, IToken} from "./token/token";
 import {CoreTran} from "./core";
+import {TableToken} from "./token/tableToken";
+import {ImgToken} from "./token/imgToken";
 
 export class Parser {
     constructor(num: number) {

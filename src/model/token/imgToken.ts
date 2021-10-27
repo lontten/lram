@@ -1,25 +1,3 @@
-export class Token {
-    constructor(code: string) {
-        this.code = code
-    }
-
-    public code: string
-    public data: Map<string, any> | string = new Map<string, any>()
-}
-
-export class TableToken {
-    constructor(code: string) {
-        this.code = code
-    }
-
-
-    public colNum: number = 0
-    public colType: number[] = []
-    public rowNum: number = 0
-
-    public code: string
-    public data: string[][] = []
-}
 
 export class ImgToken {
     constructor(code: string) {
@@ -66,5 +44,3 @@ export class ImgGroupDto {
 
 export type ImgDiv = ImgDto & ImgGroupDto
 
-
-export type IToken = Token & TableToken & ImgToken

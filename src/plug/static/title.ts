@@ -1,5 +1,5 @@
 import {Parser, Plug} from "../../model/Parser";
-import {Token} from "../../model/Token";
+import {Token} from "../../model/token/token";
 
 export const titlePlug: Plug = {
     code: "s-title",
