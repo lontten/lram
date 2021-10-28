@@ -1,8 +1,8 @@
-import {Token} from "../../model/token/token";
 import {Parser, Plug} from "../../model/Parser";
-import {ImgToken} from "../../model/token/imgToken";
+import {ImgDto, ImgGroupDto, ImgToken} from "../../model/token/imgToken";
+import {ImgRenderFun} from "../../utils/imgRender";
 
-export const imgPlug :Plug= {
+export const imgPlug: Plug = {
     code: "s-img",
     parser: (lines) => {
         let parser = new Parser(0);
@@ -28,13 +28,16 @@ export const imgPlug :Plug= {
             return parser;
         }
 
-        let token = new Token('s-img');
-        token.data["data"] = line2
+        let token = new ImgToken('s-img');
 
+        let imgDto = new ImgDto();
+        imgDto.imgName = "a.jpg"
+        imgDto.imgInfo = ""
+        imgDto.imgUrl = line2
+        token.data.push(imgDto)
 
         parser.add(token)
         return parser.set(3)
-
 
     },
     render: [
@@ -43,21 +46,11 @@ export const imgPlug :Plug= {
             subParserType: [],//解析后的数据可被这些类型继续解析
             render: (t, _ctx, _tran) => {
                 let token = t as ImgToken;
-
-
-
-                let imgUrl = token.data["data"];
-                let altName = ''
-                let imgName = ''
-                let temp = `
-<figure class="figure">
-    <img src="${imgUrl}" alt="${altName}"
-         class="figure-img img-fluid rounded" >
-    <figcaption class="figure-caption">${imgName}</figcaption>
-</figure>
-`
-
-                return temp
+                let dto = new ImgGroupDto();
+                dto.imgPos = token.imgPos
+                dto.imgDirection = token.imgDirection
+                dto.imgList = token.data
+                return ImgRenderFun(dto, _ctx, _tran)
             },
         }
     ]

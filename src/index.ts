@@ -1,15 +1,15 @@
 import {Parser, ParserFun, Plug, RenderFun} from "./model/Parser";
 import {InlineParserFun, InlinePlug, InlineRenderFun} from "./model/InlineParser";
 import {codePlug} from "./plug/dynamic/code";
-import {imgPlug} from "./plug/static/img";
+import {imgPlug} from "./plug/dynamic/img";
 import {txtPlug} from "./plug/static/txt";
 import {tablePlug} from "./plug/dynamic/table";
 import {katexPlug} from "./plug/dynamic/katex";
 import {colorPlug} from "./plug/inline/color";
 import {greenPlug} from "./plug/inline/green";
 import {titlePlug} from "./plug/static/title";
-import {ImgGroupDto} from "../dist/model/Token";
 import {IToken, Token} from "./model/token/token";
+import {ImgGroupDto} from "./model/token/imgToken";
 
 
 let parserMap = new Map<string, ParserFun>()

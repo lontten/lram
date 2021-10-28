@@ -37,7 +37,7 @@ export class ImgSpaceDto {
 
 export class ImgGroupDto {
     //图片组排列 h:水平 v:竖直
-    public imgDire: string = 'h'
+    public imgDirection: string = 'h'
     //图片介绍位置 left:左 center:中 right:右
     public imgPos: string = 'left'
 

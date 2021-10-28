@@ -1,19 +1,18 @@
-import {CoreTran} from "../model/core";
-import {ImgDto, ImgGroupDto, ImgSpaceDto, ImgToken} from "../model/token/imgToken";
+import {ImgDto, ImgGroupDto, ImgSpaceDto} from "../model/token/imgToken";
 
-export const ImgRenderFun = (token: ImgToken, _ctx: any, _tran: CoreTran) => {
+export const ImgRenderFun = (token: ImgGroupDto, _ctx: any, _tran: any) => {
     let dire = token.imgDirection;
     let imgPos = token.imgPos;
-    let arr = token.data;
+    let arr = token.imgList;
 
-    let html=''
+    let html = ''
 
-    let divDire='row'
-    if (dire=='v'){
-        divDire='column'
+    let divDire = 'row'
+    if (dire == 'v') {
+        divDire = 'column'
     }
 
-    html+= `
+    html += `
 <div style="display: flex;align-items: center;flex-flow:  ${divDire} wrap ;justify-content:  ${imgPos}" class="lram lram-img">`
 
     for (let item of arr) {
@@ -26,71 +25,40 @@ export const ImgRenderFun = (token: ImgToken, _ctx: any, _tran: CoreTran) => {
 
             let imgInfoPos = item.imgInfoPos;
             let zIndex = imgInfoPos.indexOf('.');
-            let s = imgInfoPos.substring(0,zIndex);
-            let imgInfoPosLR='row'
-            if (s=='left'){
-                imgInfoPosLR='row-reverse'
+            let s = imgInfoPos.substring(0, zIndex);
+            let imgInfoPosLR = 'row'
+            if (s == 'left') {
+                imgInfoPosLR = 'row-reverse'
             }
-            let imgInfoPosUCD = imgInfoPos.substring(0,zIndex);
+            let imgInfoPosUCD = imgInfoPos.substring(0, zIndex);
 
 
-
-
-
-            let t=`
+            html += `
 <div style="flex: none; display: flex; align-items: ${imgInfoPosUCD}; flex-direction: ${imgInfoPosLR}">
         <figure class="figure" style="margin:0 10px;">
             <img src="${imgUrl}" alt="${imgName}"
                  class="figure-img img-fluid rounded">
             <figcaption class="figure-caption">${imgName}</figcaption>
         </figure>
-
         <div style="margin: 20px; width: 20vw">
             <p class="lead">${imgInfo}</p>
         </div>
 </div>
-            `
+`
 
         }
         if (item instanceof ImgSpaceDto) {
             for (let i = 0; i < item.num; i++) {
-                html+='<div style="margin: 40px;"></div>'
+                html += '<div style="margin: 40px;"></div>'
             }
         }
 
         if (item instanceof ImgGroupDto) {
-
+            html += ImgRenderFun(item, _ctx, _tran)
         }
 
-
     }
-html+='</div>'
-    let tmp = `
-
-<!--// 居中 justify-content: center"-->
-<div style="display: flex ;align-items: center;flex-flow: row wrap ;justify-content: end" class="lram lram-img">
-
-    <!--    //img-info u c d    align-items: end;-->
-    <!--    //img l r           flex-direction: row-reverse-->
-    <div style="flex: none; display: flex; align-items: end; flex-direction: row-reverse">
-        <figure class="figure" style="margin:0 10px ; ">
-            <img src="${imgUrl}"
-                 alt="${imgName}"
-                 class="figure-img img-fluid rounded">
-            <figcaption class="figure-caption">${imgName}</figcaption>
-        </figure>
-
-        <div style="margin: 20px; width: 20vw">
-            <p class="lead">${img - info}</p>
-        </div>
-    </div>
-
-    <div style="margin: 40px;"></div>
-
-
-</div>
-
-    `
+    html += '</div>'
     return html
 
 }

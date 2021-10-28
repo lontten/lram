@@ -136,7 +136,7 @@ export const tablePlug: Plug = {
                 html += '</tbody>'
 
 
-                return '<table class="table table-bordered">' + html + '</table>'
+                return '<table class="lram-table table table-bordered">' + html + '</table>'
             },
         }
     ]
