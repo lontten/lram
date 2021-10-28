@@ -22,6 +22,15 @@ export const ImgRenderFun = (token: ImgGroupDto, _ctx: any, _tran: any) => {
 
             //img-info
             let imgInfo = item.imgInfo;
+            let infoData=''
+            if (imgInfo!=''){
+                let infoWidth = item.infoWidth;
+                infoData+=`
+    <div style="margin: 20px; width: ${infoWidth}px">
+        <p class="lead">${imgInfo}</p>
+    </div>
+`
+            }
 
             let imgInfoPos = item.imgInfoPos;
             let zIndex = imgInfoPos.indexOf('.');
@@ -30,19 +39,22 @@ export const ImgRenderFun = (token: ImgGroupDto, _ctx: any, _tran: any) => {
             if (s == 'left') {
                 imgInfoPosLR = 'row-reverse'
             }
-            let imgInfoPosUCD = imgInfoPos.substring(0, zIndex);
+
+            let imgInfoPosUCD = imgInfoPos.substring(zIndex+1, imgInfoPos.length);
+
+            let imgStyle = genImgStyle(item)
 
 
             html += `
 <div style="flex: none; display: flex; align-items: ${imgInfoPosUCD}; flex-direction: ${imgInfoPosLR}">
-        <figure class="figure" style="margin:0 10px;">
-            <img src="${imgUrl}" alt="${imgName}"
-                 class="figure-img img-fluid rounded">
-            <figcaption class="figure-caption">${imgName}</figcaption>
-        </figure>
-        <div style="margin: 20px; width: 20vw">
-            <p class="lead">${imgInfo}</p>
-        </div>
+    <figure class="figure" ">
+        <img src="${imgUrl}"
+             alt="${imgName}"
+             style="${imgStyle}"
+             class="figure-img img-fluid rounded">
+        <figcaption class="figure-caption">${imgName}</figcaption>
+    </figure>
+${infoData}
 </div>
 `
 
@@ -61,4 +73,36 @@ export const ImgRenderFun = (token: ImgGroupDto, _ctx: any, _tran: any) => {
     html += '</div>'
     return html
 
+}
+
+const genImgStyle = (v: ImgDto) => {
+    let imgStyle = ''
+
+    if (v.colorPoint > 0) {
+        let cp = (10 - v.colorPoint) / 10
+        imgStyle += `filter: grayscale(${cp});`
+    }
+
+    if (v.height != 0 || v.width != 0) {
+        if (v.height != 0) {
+            imgStyle += `height: ${v.height}px;`
+        }
+        if (v.width != 0) {
+            imgStyle += `width: ${v.width}px;`
+        }
+        return imgStyle
+    }
+    if (v.selfPoint != 0) {
+        imgStyle += `width: ${v.selfPoint}%;`
+        return imgStyle
+    }
+
+
+    if (v.winPoint != 0) {
+        imgStyle += `width: ${v.winPoint}vw;`
+        return imgStyle
+    }
+
+
+    return imgStyle
 }

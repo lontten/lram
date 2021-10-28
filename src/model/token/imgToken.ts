@@ -28,10 +28,22 @@ export class ImgDto {
     //图片介绍位置 left.start:上 right.center:中 end:下
     public imgInfoPos: string = 'right.end'
 
-    public imgWNum: number = 0
-    public imgWPoint: number = 0
-    public imgHNum: number = 0
-    public imgHPoint: number = 0
+    //img-info
+    public infoWidth:number=0
+
+    //img style
+
+    //px
+    public width:number=0
+    public height:number=0
+
+
+    public selfPoint:number=0
+    public winPoint:number=0
+
+    //color 0-10
+    public colorPoint:number=-1
+
 }
 
 export class ImgSpaceDto {

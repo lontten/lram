@@ -9,7 +9,7 @@ https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fupload
 
 
 
-@img wo.jpg h34 w45
+@img wo.jpg h400 w400 45% 45%% color10
 xxx.jpg
 @img-info
 ssssssssssssss
