@@ -1,5 +1,5 @@
 import {Parser, Plug} from "../../model/Parser";
-import {ImgDto, ImgGroupDto, ImgToken} from "../../model/token/imgToken";
+import {ImgDto, ImgToken} from "../../model/token/imgToken";
 import {ImgRenderFun} from "../../utils/imgRender";
 
 export const imgPlug: Plug = {
@@ -30,11 +30,14 @@ export const imgPlug: Plug = {
 
         let token = new ImgToken('s-img');
 
+
         let imgDto = new ImgDto();
         imgDto.imgName = "a.jpg"
         imgDto.imgInfo = ""
         imgDto.imgUrl = line2
-        token.data.push(imgDto)
+
+        token.set('h','left')
+        token.add(imgDto)
 
         parser.add(token)
         return parser.set(3)
@@ -46,11 +49,8 @@ export const imgPlug: Plug = {
             subParserType: [],//解析后的数据可被这些类型继续解析
             render: (t, _ctx, _tran) => {
                 let token = t as ImgToken;
-                let dto = new ImgGroupDto();
-                dto.imgPos = token.imgPos
-                dto.imgDirection = token.imgDirection
-                dto.imgList = token.data
-                return ImgRenderFun(dto, _ctx, _tran)
+
+                return ImgRenderFun(token.data, _ctx, _tran)
             },
         }
     ]

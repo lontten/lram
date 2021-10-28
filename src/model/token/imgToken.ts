@@ -3,20 +3,23 @@ export class ImgToken {
         this.code = code
     }
 
-    add(dto: ImgType) {
-        this.data.push(dto)
+    add(data: ImgType) {
+        this.data.imgList.push(data)
     }
 
+    set(dir: direType, pos: posType) {
+        this.data.imgDirection = dir
+        this.data.imgPos = pos
+    }
 
     public code: string
-    //图片组排列 h:水平 v:竖直
-    public imgDirection: string = 'h'
 
-    //图片介绍位置 left:左 center:中 right:右
-    public imgPos: string = 'left'
-
-    public data: Array<ImgType> = new Array<ImgType>()
+    public data: ImgGroupDto = new ImgGroupDto()
 }
+
+export type direType = 'h' | 'v'
+export type posType = 'left' | 'center' | 'right'
+
 
 export class ImgDto {
     public imgName: string = ''
@@ -37,9 +40,9 @@ export class ImgSpaceDto {
 
 export class ImgGroupDto {
     //图片组排列 h:水平 v:竖直
-    public imgDirection: string = 'h'
+    public imgDirection: direType = 'h'
     //图片介绍位置 left:左 center:中 right:右
-    public imgPos: string = 'left'
+    public imgPos: posType = 'left'
 
     public imgList: Array<ImgType> = new Array<ImgType>()
 
