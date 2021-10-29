@@ -1,5 +1,5 @@
-import {ImgRenderFun} from "./imgRender";
-import {ImgDto, ImgGroupDto} from "../model/token/imgToken";
+import {ImgRenderFun} from "../../src/utils/imgRender";
+import {ImgDto, ImgGroupDto} from "../../src/model/token/imgToken";
 import {htmlTmp} from "./cost";
 import {writeFile} from "fs";
 
@@ -49,7 +49,7 @@ describe('helloWorld', () => {
         console.log(s);
 
         let html = htmlTmp.replace('tmp_data', s)
-        writeFile('./b.html', html, function (err) {
+        writeFile('./tmp/a.html', html, function (err) {
             if (err) {
                 throw err;
             }

@@ -1,5 +1,7 @@
 import {helloWorld, lram} from '../src'
 import { expect } from 'chai'
+import {htmlTmp} from "./utils/cost";
+import {writeFile} from "fs";
 
 describe('helloWorld', () => {
     it('Should return greetings', () => {
@@ -13,29 +15,61 @@ describe('do render',()=>{
 
         var t = `
 ## a
-@img
-https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202008%2F06%2F20200806001606_wwqyy.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637549239&t=a2569b417858e7c4c1cf9e3895dcf9bf
-# a
-$$
-f(x)=\\int_{-\\infty}^\\infty\\widehat f\\xi\\,e^{2\\pi i\\xi x}\\,d\\xi
-$$
 
-## asdfa
+- saflkdsaf
+- jsdljfas
+- sdjflsaf
 
-\`\`\`
-public void hello(){
-int i=2;
-}
-\`\`\`
+1. aaa
+asjdflaksdjf
+asjdflkdasf
+asdjfkaf
+1. bb
+1. cc
+
+01. aaa
+01. bb
+01. cc
+
+al. aaa
+al. bb
+al. cc
+
+cn. aaa
+cn. bb
+cn. cc
+
+i. aaa
+i. bb
+i. cc
+
+I. aaa
+I. bb
+I. cc
+
+a. aaa
+a. bb
+a. cc
+
+A. aaa
+A. bb
+A. cc
 
 
-| a | b |
-| - | -: |
-| a | b |
-| a | b |
-| a | b |
+
+
+
  `
         let s = lram.render(t);
         console.log(s)
+
+        let html = htmlTmp.replace('tmp_data', s)
+        writeFile('./tmp/index.html', html, function (err) {
+            if (err) {
+                throw err;
+            }
+        })
+
+
     });
 })

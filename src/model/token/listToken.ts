@@ -19,17 +19,21 @@ export class ListToken {
 }
 
 export class ListDto {
+    // 0 *
     // 1 1.
     // 2 a.
     // 3 A.
     // 4 i.
     // 5 I.
+    // 6 01.
+    // 7 al.
+    // 8 cn.
     public typ: typType = '1'
 
     public list: Array<ListType> = []
 }
 
 
-export type typType = '1' | 'a' | 'A' | 'i' | 'I'
+export type typType ='-'| '1' |'01' | 'al' | 'a' | 'A' | 'i' | 'I' | 'cn'
 export type ListType = ListDto | string
 

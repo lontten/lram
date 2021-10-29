@@ -10,6 +10,7 @@ import {greenPlug} from "./plug/inline/green";
 import {titlePlug} from "./plug/static/title";
 import {IToken, Token} from "./model/token/token";
 import {ImgGroupDto} from "./model/token/imgToken";
+import {listPlug} from "./plug/dynamic/list";
 
 
 let parserMap = new Map<string, ParserFun>()
@@ -34,6 +35,7 @@ export class Lram {
         this.use(tablePlug)
         this.use(txtPlug)
         this.use(imgPlug)
+        this.use(listPlug)
 
         this.useInline(colorPlug)
         this.useInline(greenPlug)

@@ -2,6 +2,7 @@ HELP.md
 .gradle
 build/
 /logs/
+/tmp/
 /node_modules/
 package-lock.json
 !gradle/wrapper/gradle-wrapper.jar
