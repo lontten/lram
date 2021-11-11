@@ -1,3 +1,3 @@
-import {IToken} from "./token/token";
+import {Token} from "./token/token";
 
-export type CoreTran = (data: string, preToken: IToken) => string
+export type CoreTran = (data: string, preToken: Token) => string

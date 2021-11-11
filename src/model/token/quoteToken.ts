@@ -1,8 +1,5 @@
-export class QuoteToken {
-    constructor(code: string) {
-        this.code = code
-    }
+import {Token} from "./token";
 
-    public code: string
-    public data: string = ''
+export class QuoteToken extends Token {
+    data: string = ''
 }

@@ -1,5 +1,5 @@
 import {Parser, Plug} from "../../model/Parser";
-import {Token} from "../../model/token/token";
+import {BaseToken} from "../../model/token/token";
 
 export const titlePlug: Plug = {
     code: "s-title",
@@ -22,9 +22,9 @@ export const titlePlug: Plug = {
         let data = exec[2];
 
 
-        let token = new Token('s-title');
-        token.data["num"] = head.length - 1
-        token.data['data'] = data
+        let token = new BaseToken('s-title');
+        token.typ = head.length - 1
+        token.data = data
 
 
         parser.add(token)
@@ -35,12 +35,13 @@ export const titlePlug: Plug = {
         {
             code: "s-title",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            render: function (token, _ctx, tran) {
-                let n = token.data["num"];
+            render: function (t, _ctx, tran) {
+                let token=t as BaseToken
+                let n = token.typ
                 const head = "<h" + n + '>';
                 const end = "</h" + n + '>';
 
-                return head + tran(token.data['data'], token) + end
+                return head + tran(token.data, token) + end
             },
         }
     ]
