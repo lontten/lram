@@ -2,6 +2,26 @@ import {Token} from "../../model/token/token";
 import {Parser, Plug} from "../../model/Parser";
 import {renderToString} from "katex";
 
+/**
+ *  > jdsfklaf
+ *  > ajfklaf
+ *  >> ajsdlkajflf
+ *  >>> afjkdslajf
+ *  >> jalkdjfaklf
+ *  >>> jflajdfl
+ *  >> djfka
+ *
+ *  >=info
+ *  > jaslkdfjalf
+ *  > afjdlakjf
+ *  >> jsadlkjfal
+ *  >=info
+ *  >>> ajdlkjaf
+ *  > asjflsadf
+ *
+ *
+ *  # ajfklajdf
+ */
 export const quotePlug: Plug = {
     code: "s-quote", //引用
     parser: function (lines) {

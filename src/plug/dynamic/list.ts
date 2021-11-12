@@ -1,3 +1,23 @@
+/**
+ *
+ *  - jskdajf
+ *  - jsadfkafl
+ *  - jsadfkdaj
+ *
+ *  1. ajklda
+ *  1. ajsdfk
+ *  1. jfdklajf
+ *  1. jdfklajf
+ *  1. jasdfklajfl
+ *  1. ljafklaf
+ *
+ *  a. ajfdklaf
+ *  a. ajfkladjf
+ *  a. ajdsfklajfdklafsad
+ *  a. djfklajfalf
+ *
+ *
+ */
 import {Parser, Plug} from "../../model/Parser";
 import {ListToken, typType} from "../../model/token/listToken";
 import {ListRenderFun} from "../../utils/listRender";
