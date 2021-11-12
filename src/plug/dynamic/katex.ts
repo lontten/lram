@@ -1,7 +1,7 @@
 import {Parser, Plug} from "../../model/Parser";
-import {Token} from "../../model/token/token";
 import {CoreTran} from "../../model/core";
 import {renderToString} from "katex";
+import {BaseToken} from "../../model/token/token";
 
 export const katexPlug: Plug = {
     code: "s-katex",
@@ -14,8 +14,7 @@ export const katexPlug: Plug = {
             return parser
         }
 
-        let token = new Token('s-katex')
-        token.data = ''
+        let token = new BaseToken('s-katex')
         while (true) {
             lines.shift()
             lineNum++
@@ -40,10 +39,11 @@ export const katexPlug: Plug = {
         {
             code: "s-katex",
             subParserType: [],//解析后的数据可被这些类型继续解析
-            render: function (token, _ctx: any, _tran: CoreTran) {
+            render: function (t, _ctx: any, _tran: CoreTran) {
+                let token = t as BaseToken
 
                 let html = ''
-                html = renderToString(token.data as string, {
+                html = renderToString(token.data, {
                     displayMode: true,
                     throwOnError: false
                 })

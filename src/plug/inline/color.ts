@@ -1,4 +1,4 @@
-import {Token} from "../../model/token/token";
+import {BaseToken} from "../../model/token/token";
 import {InlineParser, InlinePlug} from "../../model/InlineParser";
 
 export const colorPlug: InlinePlug = {
@@ -10,24 +10,24 @@ export const colorPlug: InlinePlug = {
             return parser
         }
 
-        let token = new Token("s-txt")
+        let token = new BaseToken("s-txt")
         token.data = split[0]
         parser.add(token)
 
         split.splice(0, 1)
         split.map(k => {
-            let token = new Token("l-color")
+            let token = new BaseToken("l-color")
             let indexOf = k.indexOf('  ');
             if (indexOf < 0) {
                 token.data = k
                 parser.add(token)
             }
             if (indexOf > 0) {
-                let token1 = new Token("l-color")
+                let token1 = new BaseToken("l-color")
                 token1.data = k.substring(0, indexOf)
                 parser.add(token1)
 
-                let token2 = new Token("s-txt")
+                let token2 = new BaseToken("s-txt")
                 token2.data = k.substring(indexOf, k.length)
                 parser.add(token2)
             }

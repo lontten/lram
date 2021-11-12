@@ -1,14 +1,9 @@
+import {Token} from "./token";
 
-export class TableToken {
-    constructor(code: string) {
-        this.code = code
-    }
+export class TableToken extends Token {
+    colNum: number = 0
+    colType: number[] = []
+    rowNum: number = 0
 
-
-    public colNum: number = 0
-    public colType: number[] = []
-    public rowNum: number = 0
-
-    public code: string
-    public data: string[][] = []
+    data: string[][] = []
 }

@@ -1,6 +1,6 @@
-import {Token} from "../../model/token/token";
 import {Parser, Plug} from "../../model/Parser";
-import {renderToString} from "katex";
+import {CoreTran} from "../../model/core";
+import {QuoteToken} from "../../model/token/quoteToken";
 
 /**
  *  > jdsfklaf
@@ -22,6 +22,12 @@ import {renderToString} from "katex";
  *
  *  # ajfklajdf
  */
+ 
+export const quoteParser = (lines :string[]) => {
+    console.log(lines);
+    let parser = new Parser(0);
+    let lineNum = 0
+
 export const quotePlug: Plug = {
     code: "s-quote", //引用
     parser: function (lines) {
@@ -33,42 +39,25 @@ export const quotePlug: Plug = {
             return parser
         }
 
-        let token = new Token('s-katex')
-        token.data = ''
-        while (true) {
-            lines.shift()
-            lineNum++
+    return parser.set(lineNum)
+}
+
+export const quoteRender = (token :QuoteToken,_ctx :any,_tran:CoreTran) => {
+    console.log(token);
+
+    return ""
+}
 
 
-            if (lines.length === 0) {
-                break
-            }
-            const line = lines[0]
-
-            if (line.trim() === "$$") {
-                lineNum++
-                break
-            }
-            token.data += line;
-        }
-
-        parser.add(token)
-
-        return parser.set(lineNum)
-    },
+export const quotePlug: Plug = {
+    code: "s-quote", //引用
+    parser: quoteParser,
     render: [
         {
             code: "s-quote",
             subParserType: [],//解析后的数据可被这些类型继续解析
             render: function (token, ctx, tran) {
-                console.log(ctx)
-                console.log(tran)
-
-                let html = renderToString(token.data as string, {
-                    displayMode: true,
-                    throwOnError: false
-                })
-                return html
+                return quoteRender(token as QuoteToken, ctx, tran)
             },
         }
     ]

@@ -1,4 +1,4 @@
-import {IToken, ITokenType} from "./token/token";
+import {Token, ITokenType} from "./token/token";
 import {CoreTran} from "./core";
 
 
@@ -11,7 +11,7 @@ export class InlineParser {
         if (t instanceof Array) {
             this.tokens.push(...t)
         } else {
-            this.tokens.push(t as IToken)
+            this.tokens.push(t as Token)
         }
         return this
     }
@@ -23,8 +23,8 @@ export class InlineParser {
     }
 
 
-    public match: boolean
-    public tokens: Array<IToken> = new Array<IToken>()
+    match: boolean
+    tokens: Array<Token> = new Array<Token>()
 }
 
 

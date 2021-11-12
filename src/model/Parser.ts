@@ -1,4 +1,4 @@
-import {IToken, ITokenType} from "./token/token";
+import {Token, ITokenType} from "./token/token";
 import {CoreTran} from "./core";
 
 export class Parser {
@@ -10,7 +10,7 @@ export class Parser {
         if (t instanceof Array) {
             this.tokens.push(...t)
         } else {
-            this.tokens.push(t as IToken)
+            this.tokens.push(t as Token)
         }
         return this
     }
@@ -22,8 +22,8 @@ export class Parser {
     }
 
 
-    public line: number
-    public tokens: Array<IToken> = new Array<IToken>()
+    line: number
+    tokens: Array<Token> = new Array<Token>()
 }
 
 
@@ -34,7 +34,7 @@ export interface Plug {
 }
 
 export type ParserFun = (lines: Array<string>) => Parser
-export type RenderFun = (token: IToken, ctx: any, tran: CoreTran) => string
+export type RenderFun = (token: Token, ctx: any, tran: CoreTran) => string
 
 
 export interface PlugRender {

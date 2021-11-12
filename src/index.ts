@@ -8,7 +8,7 @@ import {katexPlug} from "./plug/dynamic/katex";
 import {colorPlug} from "./plug/inline/color";
 import {greenPlug} from "./plug/inline/green";
 import {titlePlug} from "./plug/static/title";
-import {IToken, Token} from "./model/token/token";
+import {BaseToken, Token} from "./model/token/token";
 import {ImgGroupDto} from "./model/token/imgToken";
 import {listPlug} from "./plug/dynamic/list";
 
@@ -62,7 +62,7 @@ export class Lram {
     }
 
     render(str: string) {
-        return coreTran(str, new Token('init') as IToken)
+        return coreTran(str, new BaseToken('init') as Token)
     }
 
 
@@ -78,8 +78,11 @@ function inlineCoreTran(line: string) {
             let ds = lineP(line);
             if (ds.match) {
                 flag = true
-                for (let token of ds.tokens) {
+                for (let t of ds.tokens) {
+                    let token =t as BaseToken
                     if (token.code === 's-txt') {
+
+
                         i++
                         if (i === 3) {
                             throw '100'
@@ -101,7 +104,9 @@ function inlineCoreTran(line: string) {
 }
 
 
-function coreRender(token: IToken, context: any) {
+function coreRender(t: Token, context: any) {
+    let token=t as BaseToken
+
     if (token.code === 's-txt') {
         return inlineCoreTran(token.data as string)
     }
@@ -110,7 +115,7 @@ function coreRender(token: IToken, context: any) {
 }
 
 
-function coreTran(lineData: string, preToken: IToken) {
+function coreTran(lineData: string, preToken: Token) {
     if (preToken.code === 's-txt') {
         return inlineCoreTran(lineData)
     }
