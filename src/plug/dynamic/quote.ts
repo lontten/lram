@@ -2,10 +2,42 @@ import {Parser, Plug} from "../../model/Parser";
 import {CoreTran} from "../../model/core";
 import {QuoteToken} from "../../model/token/quoteToken";
 
+/**
+ *  > jdsfklaf
+ *  > ajfklaf
+ *  >> ajsdlkajflf
+ *  >>> afjkdslajf
+ *  >> jalkdjfaklf
+ *  >>> jflajdfl
+ *  >> djfka
+ *
+ *  >=info
+ *  > jaslkdfjalf
+ *  > afjdlakjf
+ *  >> jsadlkjfal
+ *  >=info
+ *  >>> ajdlkjaf
+ *  > asjflsadf
+ *
+ *
+ *  # ajfklajdf
+ */
+ 
 export const quoteParser = (lines :string[]) => {
     console.log(lines);
     let parser = new Parser(0);
     let lineNum = 0
+
+export const quotePlug: Plug = {
+    code: "s-quote", //引用
+    parser: function (lines) {
+        let parser = new Parser(0);
+        let lineNum = 0
+
+        let line = lines[0]
+        if (line !== "$$") {
+            return parser
+        }
 
     return parser.set(lineNum)
 }
