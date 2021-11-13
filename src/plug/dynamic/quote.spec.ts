@@ -1,24 +1,88 @@
+import {quoteParser} from "./quote";
+import {expect} from "chai";
+import {Parser} from "../../model/Parser";
+import {QuoteToken} from "../../model/token/quoteToken";
 
-describe('helloWorld', () => {
+describe('parser', () => {
     it('Should return greetings', () => {
-        let ha2 = new Ha2('');
-        let ha = new Ha('');
+        let list = [
 
-        console.log(typeof ha)
-        console.log(typeof ha2)
+            {
+                a: ["adfsaf"],
+                b: new Parser(0)
+            },
+        ]
 
-        console.log(ha instanceof Ha2)
-        console.log(ha2 instanceof Ha2)
+        let parser = new Parser(2);
+        let token = new QuoteToken('s-quote');
+        token.data.push({
+            typ: 1,
+            data: 'aaa'
+        })
+
+        parser.add(token)
+
+        list.push({
+            a: [`> aaa
+            `],
+            b: parser
+        })
+
+
+        let parser2 = new Parser(3);
+        let token2 = new QuoteToken('s-quote');
+        token2.data.push({
+            typ: 1,
+            data: 'aa'
+        })
+        token2.data.push({
+            typ: 2,
+            data: 'bb'
+        })
+
+        parser2.add(token2)
+
+        list.push({
+            a: [`> aa
+            >> bb
+            `],
+            b: parser2
+        })
+
+        let parser22 = new Parser(3);
+        let token22 = new QuoteToken('s-quote');
+        token22.data.push({
+            typ: 1,
+            data: 'aa'
+        })
+        token22.data.push({
+            typ: 1,
+            data: 'bb'
+        })
+
+        parser22.add(token22)
+
+        list.push({
+            a: [`> aa
+            > bb
+            `],
+            b: parser22
+        })
+
+
+        for (let v of list) {
+            let d = quoteParser(v.a);
+            expect(d).to.deep.equal(v.b);
+        }
     })
 })
 
-class Ha {
-    constructor(code :string) {
-        this.code=code
-    }
-    code:string
-}
 
-class Ha2 extends  Ha{
-    data:string=''
-}
+describe('render', () => {
+    it('Should return greetings', () => {
+
+        console.log("")
+
+    })
+})
+
