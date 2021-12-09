@@ -105,6 +105,31 @@ A. cc
 | xxx | sss | www |
 
 
+@api.get /hello/:id
+@api.post /hello/list/:id/:type
+
+@api.body
+{
+    "name": "lram",
+    "age": 18
+}
+
+@api.form
+{
+    "file": bin,
+    "age": 18
+}
+
+@api.header
+{
+    token: "xxx"
+    uid: "xxx"
+}
+
+
+#center
+
+
 ```
 public void hello () {
  string str = "hello world !";
