@@ -16,6 +16,12 @@ describe('do render',()=>{
         var t = `
 ## a
 
+$$
+f(x)=\\int_{-\\infty}^\\infty\\widehat f\\xi\\,e^{2\\pi i\\xi x}\\,d\\xi
+$$
+
+
+
 - saflkdsaf
 - jsdljfas
 - sdjflsaf

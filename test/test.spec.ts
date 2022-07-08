@@ -1,14 +1,12 @@
-
-
-describe('do render',()=>{
+describe('do render', () => {
     it('should return h1', function () {
         let reg = /^(-|1\.|01\.|a\.|A\.|i\.|I\.|cn\.|al\.)\s+(\S+)$/
-          reg = /^\.\s+(\S+)$/
+        reg = /^\.\s+(\S+)$/
         let t = '-   ajlsdfklajfla'
-          t = '.   jkljaf'
+        t = '.   jkljaf'
 
         let exec = reg.exec(t);
-        if (exec==null){
+        if (exec == null) {
             console.log('null');
             return
         }
