@@ -111,7 +111,7 @@ const tableRender = (token: TableToken, _ctx: any, _tran: any) => {
     let colNum = token.colNum;
     let rowNum = token.rowNum;
 
-    html += '<thead class="table-success">'
+    html += '<thead>'
     html += '<tr>'
     html += renderRow(token.data[0], colNum)
     html += '</tr>'
@@ -126,7 +126,7 @@ const tableRender = (token: TableToken, _ctx: any, _tran: any) => {
     html += '</tbody>'
 
 
-    return '<table class="lram-table table table-bordered">' + html + '</table>'
+    return '<table class="table-auto table-bordered border-green-500">' + html + '</table>'
 }
 
 function renderRow(rows: any, len: number) {
