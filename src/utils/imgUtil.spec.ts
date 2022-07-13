@@ -1,6 +1,6 @@
-import {ImgRenderFun} from "../../src/utils/imgRender";
-import {ImgDto, ImgGroupDto} from "../../src/model/token/imgToken";
-import {htmlTmp} from "./cost";
+import {imgRender} from "./imgUtil";
+import {ImgDto, ImgGroupDto} from "../model/token/imgToken";
+import {htmlTmp} from "../../test/utils/cost";
 import {writeFile} from "fs";
 
 describe('helloWorld', () => {
@@ -45,11 +45,11 @@ describe('helloWorld', () => {
         imgGroupDto.imgList.push(imgGroupDto2)
 
 
-        let s = ImgRenderFun(imgGroupDto, null, null);
+        let s = imgRender(imgGroupDto, null, null);
         console.log(s);
 
         let html = htmlTmp.replace('tmp_data', s)
-        writeFile('./tmp/a.html', html, function (err) {
+        writeFile('../tmp/img.html', html, function (err) {
             if (err) {
                 throw err;
             }

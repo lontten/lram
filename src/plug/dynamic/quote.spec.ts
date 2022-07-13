@@ -1,7 +1,7 @@
-import {quoteParser} from "./quote";
 import {expect} from "chai";
 import {Parser} from "../../model/Parser";
 import {QuoteToken} from "../../model/token/quoteToken";
+import {quoteParser} from "../../utils/quoteUtil";
 
 describe('parser', () => {
     it('Should return greetings', () => {

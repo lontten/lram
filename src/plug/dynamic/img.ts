@@ -1,48 +1,10 @@
-import {Parser, Plug} from "../../model/Parser";
-import {ImgDto, ImgToken} from "../../model/token/imgToken";
-import {ImgRenderFun} from "../../utils/imgRender";
+import {Plug} from "../../model/Parser";
+import {ImgToken} from "../../model/token/imgToken";
+import {imgParser, imgRender} from "../../utils/imgUtil";
 
 export const imgPlug: Plug = {
     code: "s-img",
-    parser: (lines) => {
-        let parser = new Parser(0);
-
-
-        if (lines.length < 2) {
-            return parser;
-        }
-
-        let line = lines[0]
-        if (line !== "@img") {
-            return parser;
-        }
-
-
-        let line2 = lines[1];
-        if (line2.length < 5) {
-            return parser;
-        }
-
-        let line3 = lines[1];
-        if (line3.trim() === "") {
-            return parser;
-        }
-
-        let token = new ImgToken('s-img');
-
-
-        let imgDto = new ImgDto();
-        imgDto.imgName = "a.jpg"
-        imgDto.imgInfo = ""
-        imgDto.imgUrl = line2
-
-        token.set('h','left')
-        token.add(imgDto)
-
-        parser.add(token)
-        return parser.set(3)
-
-    },
+    parser: imgParser,
     render: [
         {
             code: "s-img",
@@ -50,7 +12,7 @@ export const imgPlug: Plug = {
             render: (t, _ctx, _tran) => {
                 let token = t as ImgToken;
 
-                return ImgRenderFun(token.data, _ctx, _tran)
+                return imgRender(token.data, _ctx, _tran)
             },
         }
     ]

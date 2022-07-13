@@ -1,6 +1,45 @@
-import {ImgDto, ImgGroupDto, ImgSpaceDto} from "../model/token/imgToken";
+import {ImgDto, ImgGroupDto, ImgSpaceDto, ImgToken} from "../model/token/imgToken";
+import {Parser} from "../model/Parser";
 
-export const ImgRenderFun = (token: ImgGroupDto, _ctx: any, _tran: any) => {
+const imgParser = (lines: string[]) => {
+    let parser = new Parser(0);
+
+
+    if (lines.length < 2) {
+        return parser;
+    }
+
+    let line = lines[0]
+    if (line !== "@img") {
+        return parser;
+    }
+
+
+    let line2 = lines[1];
+    if (line2.length < 5) {
+        return parser;
+    }
+
+    let line3 = lines[1];
+    if (line3.trim() === "") {
+        return parser;
+    }
+
+    let token = new ImgToken('s-img');
+
+
+    let imgDto = new ImgDto();
+    imgDto.imgName = "a.jpg"
+    imgDto.imgInfo = ""
+    imgDto.imgUrl = line2
+
+    token.set('h', 'left')
+    token.add(imgDto)
+
+    parser.add(token)
+    return parser.set(3)
+}
+const imgRender = (token: ImgGroupDto, _ctx: any, _tran: any) => {
     let dire = token.imgDirection;
     let imgPos = token.imgPos;
     let arr = token.imgList;
@@ -22,10 +61,10 @@ export const ImgRenderFun = (token: ImgGroupDto, _ctx: any, _tran: any) => {
 
             //img-info
             let imgInfo = item.imgInfo;
-            let infoData=''
-            if (imgInfo!=''){
+            let infoData = ''
+            if (imgInfo != '') {
                 let infoWidth = item.infoWidth;
-                infoData+=`
+                infoData += `
     <div style="margin: 20px; width: ${infoWidth}px">
         <p class="lead">${imgInfo}</p>
     </div>
@@ -40,7 +79,7 @@ export const ImgRenderFun = (token: ImgGroupDto, _ctx: any, _tran: any) => {
                 imgInfoPosLR = 'row-reverse'
             }
 
-            let imgInfoPosUCD = imgInfoPos.substring(zIndex+1, imgInfoPos.length);
+            let imgInfoPosUCD = imgInfoPos.substring(zIndex + 1, imgInfoPos.length);
 
             let imgStyle = genImgStyle(item)
 
@@ -66,7 +105,7 @@ ${infoData}
         }
 
         if (item instanceof ImgGroupDto) {
-            html += ImgRenderFun(item, _ctx, _tran)
+            html += imgRender(item, _ctx, _tran)
         }
 
     }
@@ -106,3 +145,4 @@ const genImgStyle = (v: ImgDto) => {
 
     return imgStyle
 }
+export {imgRender, imgParser}
