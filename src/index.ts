@@ -79,7 +79,7 @@ function inlineCoreTran(line: string) {
             if (ds.match) {
                 flag = true
                 for (let t of ds.tokens) {
-                    let token =t as BaseToken
+                    let token = t as BaseToken
                     if (token.code === 's-txt') {
 
 
@@ -105,7 +105,7 @@ function inlineCoreTran(line: string) {
 
 
 function coreRender(t: Token, context: any) {
-    let token=t as BaseToken
+    let token = t as BaseToken
 
     if (token.code === 's-txt') {
         return inlineCoreTran(token.data as string)
@@ -157,7 +157,7 @@ function coreTran(lineData: string, preToken: Token) {
             lines.shift()
         }
     }
-    return html
+    return `<div class="lram">${html}</div>`
 }
 
 

@@ -126,7 +126,7 @@ const tableRender = (token: TableToken, _ctx: any, _tran: any) => {
     html += '</tbody>'
 
 
-    return '<table class="table-auto table-bordered border-green-500">' + html + '</table>'
+    return '<table class="">' + html + '</table>'
 }
 
 function renderRow(rows: any, len: number) {
