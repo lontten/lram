@@ -1,0 +1,5 @@
+src/
+test/
+*.spec.ts
+*.md
+*.scss

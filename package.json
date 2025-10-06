@@ -1,7 +1,12 @@
 {
   "name": "lram",
-  "version": "0.1.2-alpha.8",
+  "version": "0.1.2-alpha.10",
   "description": "lontten lram markdown js",
+  "files": [
+    "dist/",
+    "README.md",
+    "lram.css"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
@@ -13,7 +18,8 @@
     "build:scss": "npm run generate:scss",
     "dev:scss": "npm run generate:scss",
     "generate:scss": "sass lram.scss:lram.css",
-    "release": "run-s build:* && npm publish"
+    "clean": "rm -rf dist",
+    "release": "npm run clean && run-s build:* && npm publish"
   },
   "keywords": [
     "lontten",
