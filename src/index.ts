@@ -9,7 +9,6 @@ import {colorPlug} from "./plug/inline/color";
 import {greenPlug} from "./plug/inline/green";
 import {titlePlug} from "./plug/static/title";
 import {BaseToken, Token} from "./model/token/token";
-import {ImgGroupDto} from "./model/token/imgToken";
 import {listPlug} from "./plug/dynamic/list";
 
 // 优化1: 统一管理所有map与array为类属性，避免全局变量污染
@@ -21,8 +20,8 @@ export class Lram {
     private inlineParserArr: InlineParserFun[] = [];
     private inlineRenderMap = new Map<string, InlineRenderFun>();
 
-    private imgTagMap = new Map<string, ImgGroupDto>();
-    private aliasMap = new Map<string, string>();
+    // private imgTagMap = new Map<string, ImgGroupDto>();
+    // private aliasMap = new Map<string, string>();
 
     constructor() {
         this.use(titlePlug);
@@ -36,9 +35,6 @@ export class Lram {
         this.useInline(colorPlug);
         this.useInline(greenPlug);
 
-        // 调试可选
-        // console.log(this.imgTagMap);
-        // console.log(this.aliasMap);
     }
 
     useInline(plug: InlinePlug) {
