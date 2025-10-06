@@ -6,8 +6,8 @@ import {test} from 'vitest'
 
 test('helloWorld', () => {
     let a = `https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202008%2F06%2F20200806001606_wwqyy.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637549239&t=a2569b417858e7c4c1cf9e3895dcf9bf`
-    let b = "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic2.zhimg.com%2F50%2Fv2-4175772413506316c621f16b0ee5d65f_hd.jpg&refer=http%3A%2F%2Fpic2.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638015792&t=1938a65bfce4da1c125455becf4049f4"
-    let c = "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F12%2F72%2F7d%2F12727d01266da5939e2ad25819dfdb40.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637998132&t=865ec20f2245623c6a4aebddd6c022d4"
+    let b = a
+    let c =a
 
     console.log(a);
     console.log(b);
@@ -49,7 +49,7 @@ test('helloWorld', () => {
     console.log(s);
 
     let html = htmlTmp.replace('tmp_data', s)
-    writeFile('../tmp/img.html', html, function (err) {
+    writeFile('./tmp/img.html', html, function (err) {
         if (err) {
             throw err;
         }

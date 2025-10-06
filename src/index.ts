@@ -12,174 +12,135 @@ import {BaseToken, Token} from "./model/token/token";
 import {ImgGroupDto} from "./model/token/imgToken";
 import {listPlug} from "./plug/dynamic/list";
 
-
-let parserMap = new Map<string, ParserFun>()
-let subParserMap = new Map<string, Array<string>>()
-let renderMap = new Map<string, RenderFun>()
-
-let inlineParserArr = new Array<InlineParserFun>()
-let inlineRenderMap = new Map<string, InlineRenderFun>()
-
-
-let imgTagMap = new Map<string, ImgGroupDto>()
-let aliasMap = new Map<string, string>()
-console.log(imgTagMap)
-console.log(aliasMap)
-
-
+// 优化1: 统一管理所有map与array为类属性，避免全局变量污染
 export class Lram {
+    private parserMap = new Map<string, ParserFun>();
+    private subParserMap = new Map<string, Array<string>>();
+    private renderMap = new Map<string, RenderFun>();
+
+    private inlineParserArr: InlineParserFun[] = [];
+    private inlineRenderMap = new Map<string, InlineRenderFun>();
+
+    private imgTagMap = new Map<string, ImgGroupDto>();
+    private aliasMap = new Map<string, string>();
+
     constructor() {
-        this.use(titlePlug)
-        this.use(katexPlug)
-        this.use(codePlug)
-        this.use(tablePlug)
-        this.use(txtPlug)
-        this.use(imgPlug)
-        this.use(listPlug)
+        this.use(titlePlug);
+        this.use(katexPlug);
+        this.use(codePlug);
+        this.use(tablePlug);
+        this.use(txtPlug);
+        this.use(imgPlug);
+        this.use(listPlug);
 
-        this.useInline(colorPlug)
-        this.useInline(greenPlug)
+        this.useInline(colorPlug);
+        this.useInline(greenPlug);
 
+        // 调试可选
+        // console.log(this.imgTagMap);
+        // console.log(this.aliasMap);
     }
 
-    useInline(f: InlinePlug) {
-        if (f.parser !== undefined) {
-            inlineParserArr.push(f.parser)
+    useInline(plug: InlinePlug) {
+        if (plug.parser) {
+            this.inlineParserArr.push(plug.parser);
         }
-        f.render.map(render => {
-            inlineRenderMap.set(render.code, render.render)
-        })
+        plug.render.forEach(render => {
+            this.inlineRenderMap.set(render.code, render.render);
+        });
     }
 
-    use(f: Plug) {
-        if (f.parser !== undefined) {
-            parserMap.set(f.code, f.parser)
+    use(plug: Plug) {
+        if (plug.parser) {
+            this.parserMap.set(plug.code, plug.parser);
         }
-        f.render.map(render => {
-            renderMap.set(render.code, render.render)
-            subParserMap.set(render.code, render.subParserType)
-        })
+        plug.render.forEach(render => {
+            this.renderMap.set(render.code, render.render);
+            this.subParserMap.set(render.code, render.subParserType);
+        });
     }
 
-    render(str: string) {
-        return coreTran(str, new BaseToken('init') as Token)
+    render(str: string): string {
+        return this.coreTran(str, new BaseToken('init') as Token);
     }
 
+    private inlineCoreTran(line: string, depth = 0): string {
+        // 防止无限递归
+        if (depth > 10) throw new Error('Inline recursion depth exceeded');
+        let html = '';
+        let processed = false;
 
-}
-
-
-function inlineCoreTran(line: string) {
-    let i = 0;
-    let html = '';
-    while (true) {
-        let flag = false;
-        for (let lineP of inlineParserArr) {
-            let ds = lineP(line);
+        for (const lineP of this.inlineParserArr) {
+            const ds = lineP(line);
             if (ds.match) {
-                flag = true
-                for (let t of ds.tokens) {
-                    let token = t as BaseToken
+                processed = true;
+                for (const t of ds.tokens) {
+                    const token = t as BaseToken;
                     if (token.code === 's-txt') {
-
-
-                        i++
-                        if (i === 3) {
-                            throw '100'
-                        }
-                        html += inlineCoreTran(token.data as string)
+                        html += this.inlineCoreTran(token.data as string, depth + 1);
                     } else {
-                        const render = inlineRenderMap.get(token.code)
-                        if (render === undefined) {
-                            throw '100'
-                        }
-                        html += render(token.data)
+                        const render = this.inlineRenderMap.get(token.code);
+                        if (!render) throw new Error(`Inline render not found for code: ${token.code}`);
+                        html += render(token.data);
                     }
                 }
-                return html
+                break; // 只处理第一个匹配的parser
             }
         }
-        if (!flag) {
-            html += line
-            break
+        return processed ? html : line;
+    }
+
+    private coreRender(token: Token, context: any): string {
+        const baseToken = token as BaseToken;
+        if (baseToken.code === 's-txt') {
+            return this.inlineCoreTran(baseToken.data as string);
         }
-    }
-    return html
-}
-
-
-function coreRender(t: Token, context: any) {
-    let token = t as BaseToken
-
-    if (token.code === 's-txt') {
-        return inlineCoreTran(token.data as string)
-    }
-    const render = renderMap.get(token.code)
-    if (render === undefined) {
-        throw '100'
+        const render = this.renderMap.get(baseToken.code);
+        if (!render) throw new Error(`Render not found for code: ${baseToken.code}`);
+        return render(baseToken, context, this.coreTran.bind(this));
     }
 
-    return render(token, context, coreTran)
-}
+    private coreTran(lineData: string, preToken: Token): string {
+        if (preToken.code === 's-txt') {
+            return this.inlineCoreTran(lineData);
+        }
+        const lines = lineData.trim().split('\n');
+        let html = '';
 
-
-function coreTran(lineData: string, preToken: Token) {
-    if (preToken.code === 's-txt') {
-        return inlineCoreTran(lineData)
-    }
-
-    let lines = lineData.trim().split('\n');
-
-    let html = '';
-
-    while (lines.length > 0) {
-        let flag = false;
-
-
-        let parserFunCodes = Object.keys(parserMap);
-        for (const p of parserFunCodes) {
-            if (preToken.code !== 'init') {
-                const parser = subParserMap.get(preToken.code)
-                if (parser === undefined) {
-                    continue
+        while (lines.length > 0) {
+            let processed = false;
+            // 优化2: Object.keys(parserMap) → [...this.parserMap.keys()]
+            for (const p of this.parserMap.keys()) {
+                if (preToken.code !== 'init') {
+                    const parserTypes = this.subParserMap.get(preToken.code);
+                    if (!parserTypes || !parserTypes.includes(p)) continue;
                 }
-                if (parser.indexOf(p) < 0) {
-                    continue
+                // 深拷贝
+                const linesCopy: string[] = JSON.parse(JSON.stringify(lines));
+                const parser = this.parserMap.get(p);
+                if (!parser) continue;
+                const ds: Parser = parser(linesCopy);
+                if (ds.line > 0) {
+                    processed = true;
+                    lines.splice(0, ds.line);
+                    ds.tokens.forEach(token => {
+                        html += this.coreRender(token, null);
+                    });
+                    break;
                 }
             }
-
-
-            //深拷贝
-            const v = JSON.parse(JSON.stringify(lines));
-            const parser = parserMap.get(p)
-            if (parser === undefined) {
-                continue
-            }
-            let ds: Parser = parser(v);
-
-            if (ds.line > 0) {
-                flag = true
-                lines.splice(0, ds.line)
-
-                ds.tokens.map(token => {
-                    html += coreRender(token, null)
-                })
-                break
+            if (!processed) {
+                const string = lines[0];
+                if (!string.startsWith('//')) {
+                    html += this.inlineCoreTran(string);
+                }
+                lines.shift();
             }
         }
-        if (!flag) {
-            let string = lines[0];
-            if (string.substr(0, 2) !== '//') {
-                html += inlineCoreTran(string)
-            }
-            lines.shift()
-        }
+        return `<div class="lram">${html}</div>`;
     }
-    return `<div class="lram">${html}</div>`
 }
 
-
-export const helloWorld = () => {
-    return 'Howdy!'
-}
-export const lram = new Lram()
+// 工具函数和实例
+export const helloWorld = () => 'Howdy!';
+export const lram = new Lram();
