@@ -47,17 +47,17 @@ export class Lram {
             inlineParserArr.push(f.parser)
         }
         f.render.map(render => {
-            inlineRenderMap[render.code] = render.render
+            inlineRenderMap.set(render.code, render.render)
         })
     }
 
     use(f: Plug) {
         if (f.parser !== undefined) {
-            parserMap[f.code] = f.parser
+            parserMap.set(f.code, f.parser)
         }
         f.render.map(render => {
-            renderMap[render.code] = render.render
-            subParserMap[render.code] = render.subParserType
+            renderMap.set(render.code, render.render)
+            subParserMap.set(render.code, render.subParserType)
         })
     }
 
@@ -89,7 +89,11 @@ function inlineCoreTran(line: string) {
                         }
                         html += inlineCoreTran(token.data as string)
                     } else {
-                        html += inlineRenderMap[token.code](token.data)
+                        const render = inlineRenderMap.get(token.code)
+                        if (render === undefined) {
+                            throw '100'
+                        }
+                        html += render(token.data)
                     }
                 }
                 return html
@@ -110,8 +114,12 @@ function coreRender(t: Token, context: any) {
     if (token.code === 's-txt') {
         return inlineCoreTran(token.data as string)
     }
+    const render = renderMap.get(token.code)
+    if (render === undefined) {
+        throw '100'
+    }
 
-    return renderMap[token.code](token, context, coreTran)
+    return render(token, context, coreTran)
 }
 
 
@@ -130,14 +138,24 @@ function coreTran(lineData: string, preToken: Token) {
 
         let parserFunCodes = Object.keys(parserMap);
         for (const p of parserFunCodes) {
-            if (preToken.code !== 'init' && subParserMap[preToken.code].indexOf(p) < 0) {
-                continue
+            if (preToken.code !== 'init') {
+                const parser = subParserMap.get(preToken.code)
+                if (parser === undefined) {
+                    continue
+                }
+                if (parser.indexOf(p) < 0) {
+                    continue
+                }
             }
 
 
             //深拷贝
             const v = JSON.parse(JSON.stringify(lines));
-            let ds: Parser = parserMap[p](v);
+            const parser = parserMap.get(p)
+            if (parser === undefined) {
+                continue
+            }
+            let ds: Parser = parser(v);
 
             if (ds.line > 0) {
                 flag = true

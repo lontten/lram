@@ -1,4 +1,4 @@
-import {Token, ITokenType} from "./token/token";
+import {ITokenType, Token} from "./token/token";
 import {CoreTran} from "./core";
 
 
@@ -34,7 +34,7 @@ export interface InlinePlug {
 }
 
 export type InlineParserFun = (lines: string) => InlineParser
-export type InlineRenderFun = (token: string, ctx: any, tran: CoreTran) => string
+export type InlineRenderFun = (token: string, ctx?: any, tran?: CoreTran) => string
 
 
 export interface InlinePlugRender {
