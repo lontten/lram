@@ -4,13 +4,11 @@ build/
 /logs/
 /tmp/
 /node_modules/
-package-lock.json
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 
-yarn.lock
 
 
 ### STS ###

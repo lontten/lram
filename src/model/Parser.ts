@@ -1,4 +1,4 @@
-import {Token, ITokenType} from "./token/token";
+import {ITokenType, Token} from "./token/token";
 import {CoreTran} from "./core";
 
 export class Parser {
