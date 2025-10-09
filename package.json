@@ -1,25 +1,32 @@
 {
   "name": "lram",
-  "version": "0.1.2-alpha.13",
+  "version": "0.1.2-alpha.16",
   "description": "lontten lram markdown js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./lram.scss": "./lram.scss"
+  },
   "files": [
-    "dist/",
-    "README.md",
-    "lram.css"
+    "dist",
+    "lram.scss",
+    "README.md"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "repository": {
     "url": "https://github.com/lontten/lram.git"
   },
   "scripts": {
-    "test": "vitest",
-    "build:ts": "tsc",
-    "build:scss": "npm run generate:scss",
-    "dev:scss": "npm run generate:scss",
-    "generate:scss": "sass lram.scss:lram.css",
-    "clean": "rm -rf dist",
-    "release": "npm run clean && run-s build:* && npm publish"
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "prerelease": "npm run build",
+    "release": "bumpp && npm publish"
   },
   "keywords": [
     "lontten",
@@ -34,17 +41,17 @@
   },
   "devDependencies": {
     "@types/katex": "^0.16.7",
-    "@types/node": "^24.6.2",
-    "vitest": "^3.2.4",
-    "ts-node": "^10.9.2",
-    "sass": "^1.93.2",
+    "@types/node": "^24.7.0",
+    "bumpp": "^10.3.1",
     "npm-run-all": "^4.1.5",
-    "tslint": "^6.1.3",
+    "sass": "^1.93.2",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
     "typescript": "^5.9.3",
-    "@biomejs/biome": "2.2.5"
+    "vitest": "^3.2.4"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=18.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
