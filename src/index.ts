@@ -47,17 +47,17 @@ export class Lram {
             inlineParserArr.push(f.parser)
         }
         f.render.map(render => {
-            inlineRenderMap[render.code] = render.render
+            inlineRenderMap.set(render.code, render.render)
         })
     }
 
     use(f: Plug) {
         if (f.parser !== undefined) {
-            parserMap[f.code] = f.parser
+            parserMap.set(f.code, f.parser)
         }
         f.render.map(render => {
-            renderMap[render.code] = render.render
-            subParserMap[render.code] = render.subParserType
+            renderMap.set(render.code, render.render)
+            subParserMap.set(render.code, render.subParserType)
         })
     }
 
@@ -89,7 +89,7 @@ function inlineCoreTran(line: string) {
                         }
                         html += inlineCoreTran(token.data as string)
                     } else {
-                        html += inlineRenderMap[token.code](token.data)
+                        html += (inlineRenderMap.get(token.code) as any)(token.data)
                     }
                 }
                 return html
@@ -111,7 +111,7 @@ function coreRender(t: Token, context: any) {
         return inlineCoreTran(token.data as string)
     }
 
-    return renderMap[token.code](token, context, coreTran)
+    return (renderMap.get(token.code) as any)(token, context, coreTran)
 }
 
 
@@ -130,14 +130,14 @@ function coreTran(lineData: string, preToken: Token) {
 
         let parserFunCodes = Object.keys(parserMap);
         for (const p of parserFunCodes) {
-            if (preToken.code !== 'init' && subParserMap[preToken.code].indexOf(p) < 0) {
+            if (preToken.code !== 'init' && (subParserMap.get(preToken.code) as any).indexOf(p) < 0) {
                 continue
             }
 
 
             //深拷贝
             const v = JSON.parse(JSON.stringify(lines));
-            let ds: Parser = parserMap[p](v);
+            let ds: Parser = (parserMap.get(p) as any)(v);
 
             if (ds.line > 0) {
                 flag = true
