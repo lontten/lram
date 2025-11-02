@@ -1,7 +1,7 @@
 {
   "name": "lram",
-  "version": "0.1.2-alpha.30",
-  "description": "lontten lram markdown js",
+  "version": "0.1.2-alpha.31",
+  "description": "类 markdown ",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -21,7 +21,7 @@
   "scripts": {
     "generate:scss": "sass styles:styles --source-map",
     "build:scss": "npm run generate:scss",
-    "build": "tsdown",
+    "build": "tsdown --platform neutral --sourcemap --minify",
     "dev": "tsdown --watch",
     "test": "vitest",
     "typecheck": "tsc --noEmit",

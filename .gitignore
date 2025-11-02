@@ -10,7 +10,7 @@ package-lock.json
 !**/src/test/**/build/
 
 
-yarn.lock
+.DS_Store
 
 
 ### STS ###
