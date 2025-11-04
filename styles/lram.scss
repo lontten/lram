@@ -1,51 +1,7 @@
+@use "blockquote";
+@use "hx";
+
 .lram {
 
-  blockquote p {
-    padding: 10px 50px;
-    /*margin:auto; 不需要了
-    width:500px;*/
-  }
 
-  blockquote p:first-child {
-    background: url(open-quote.gif) no-repeat scroll left top;
-  }
-
-  blockquote {
-    background: url(close-quote.gif) no-repeat scroll right bottom;
-    /*width:600px;不需要了*/
-    display: inline-block;
-    /*定义为内联块级元素，这样其默认宽不会是整个浏览器的宽度了
-      而是适应内容的变化而动态的变化。 这步是修改的关键一步，关键在于inline-block的运用
-    */
-  }
-
-
-  h1 {
-    font-size: 3rem;
-    margin: 0.6rem 0;
-  }
-
-  h2 {
-    font-size: 2rem;
-    margin: 0.8rem 0;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    margin: 0.9rem 0;
-  }
-
-  h4 {
-    font-size: 1.17rem;
-    margin: 1rem 0;
-  }
-
-  h5 {
-    margin: 1.1rem 0;
-  }
-
-  h6 {
-    font-size: .83rem;
-    margin: 1.2rem 0;
-  }
 }

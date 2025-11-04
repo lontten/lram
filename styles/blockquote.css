@@ -102,37 +102,4 @@
   content: "— ";
 }
 
-.lram h1, .lram h2, .lram h3, .lram h4, .lram h5, .lram h6 {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-weight: 600;
-  line-height: 1.25;
-  margin-bottom: 16px;
-  color: #24292e;
-}
-.lram h1 {
-  font-size: 32px;
-  margin-top: 24px;
-}
-.lram h2 {
-  font-size: 24px;
-  margin-top: 20px;
-}
-.lram h3 {
-  font-size: 20px;
-  margin-top: 16px;
-}
-.lram h4 {
-  font-size: 16px;
-  margin-top: 12px;
-}
-.lram h5 {
-  font-size: 14px;
-  margin-top: 8px;
-}
-.lram h6 {
-  font-size: 12px;
-  margin-top: 4px;
-  color: #6a737d;
-}
-
-/*# sourceMappingURL=lram.css.map */
+/*# sourceMappingURL=blockquote.css.map */

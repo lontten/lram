@@ -1,9 +1,9 @@
-import {Plug} from "../../model/Parser";
-import {CoreTran} from "../../model/core";
+import type {Plug} from "../../model/Parser";
+import type {CoreTran} from "../../model/core";
 import {BaseToken, Token} from "../../model/token/token";
 
 export const txtPlug: Plug = {
-    code:'',
+    code: '',
     render: [
         {
             code: "s-txt",

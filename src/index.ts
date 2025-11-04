@@ -1,5 +1,5 @@
-import {Parser, ParserFun, Plug, RenderFun} from "./model/Parser";
-import {InlineParserFun, InlinePlug, InlineRenderFun} from "./model/InlineParser";
+import {Parser, type ParserFun, type Plug, type RenderFun} from "./model/Parser";
+import type {InlineParserFun, InlinePlug, InlineRenderFun} from "./model/InlineParser";
 import {codePlug} from "./plug/dynamic/code";
 import {imgPlug} from "./plug/dynamic/img";
 import {txtPlug} from "./plug/static/txt";
@@ -64,8 +64,6 @@ export class Lram {
     render(str: string) {
         return coreTran(str, new BaseToken('init') as Token)
     }
-
-
 }
 
 

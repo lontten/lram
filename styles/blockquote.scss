@@ -1,0 +1,112 @@
+.lram {
+
+  /* 引用块基础样式 */
+  blockquote {
+    margin: 20px 0;
+    padding: 20px;
+    border-left: 6px solid;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.03), transparent);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    position: relative;
+  }
+
+  /* 引用图标 */
+  blockquote::before {
+    content: "";
+    font-size: 60px;
+    color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    left: 10px;
+    top: -10px;
+    font-family: Georgia, serif;
+  }
+
+  /* 不同类型的引用块 */
+  .quote-default {
+    border-left-color: #3498db;
+    background: linear-gradient(to right, rgba(52, 152, 219, 0.08), transparent);
+  }
+
+  .quote-success {
+    border-left-color: #2ecc71;
+    background: linear-gradient(to right, rgba(46, 204, 113, 0.08), transparent);
+  }
+
+  .quote-warning {
+    border-left-color: #f39c12;
+    background: linear-gradient(to right, rgba(243, 156, 18, 0.08), transparent);
+  }
+
+  .quote-error {
+    border-left-color: #e74c3c;
+    background: linear-gradient(to right, rgba(231, 76, 60, 0.08), transparent);
+  }
+
+  .quote-info {
+    border-left-color: #9b59b6;
+    background: linear-gradient(to right, rgba(155, 89, 182, 0.08), transparent);
+  }
+
+  .quote-note {
+    border-left-color: #7f8c8d;
+    background: linear-gradient(to right, rgba(127, 140, 141, 0.08), transparent);
+  }
+
+  /* 引用标题样式 */
+  .quote-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .quote-title::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+
+  /* 不同引用类型的标题颜色 */
+  .quote-default .quote-title::before {
+    background-color: #3498db;
+  }
+
+  .quote-success .quote-title::before {
+    background-color: #2ecc71;
+  }
+
+  .quote-warning .quote-title::before {
+    background-color: #f39c12;
+  }
+
+  .quote-error .quote-title::before {
+    background-color: #e74c3c;
+  }
+
+  .quote-info .quote-title::before {
+    background-color: #9b59b6;
+  }
+
+  .quote-note .quote-title::before {
+    background-color: #7f8c8d;
+  }
+
+  /* 引用作者样式 */
+  .quote-author {
+    margin-top: 10px;
+    text-align: right;
+    font-style: normal;
+    font-weight: 600;
+    color: #555;
+  }
+
+  .quote-author::before {
+    content: "— ";
+  }
+
+
+}

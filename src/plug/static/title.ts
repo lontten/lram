@@ -1,4 +1,4 @@
-import {Parser, Plug} from "../../model/Parser";
+import {Parser, type Plug} from "../../model/Parser";
 import {BaseToken} from "../../model/token/token";
 
 export const titlePlug: Plug = {
