@@ -1,15 +1,13 @@
 import {codeParser} from "./codeUtil";
+import {test} from "vitest";
 
-describe('helloWorld', () => {
-    it('Should return greetings', () => {
-        let t = `\`\`\`js
+test('helloWorld', () => {
+    let t = `\`\`\`js
 public void hello(){
 }
 \`\`\`
 # aaa`
-        let lines = t.trim().split('\n');
-        const a = codeParser(lines)
-        console.log(a)
-
-    })
+    let lines = t.trim().split('\n');
+    const a = codeParser(lines)
+    console.log(a)
 })

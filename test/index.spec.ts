@@ -1,19 +1,16 @@
 import {helloWorld, lram} from '../src'
-import { expect } from 'chai'
 import {htmlTmp} from "./utils/cost";
 import {writeFile} from "fs";
+import {test, expect} from "vitest";
 
-describe('helloWorld', () => {
-    it('Should return greetings', () => {
-        expect(helloWorld()).equals('Howdy!')
-    })
+test('helloWorld', () => {
+    expect(helloWorld()).equals('Howdy!')
 })
 
 
-describe('do render',()=>{
-    it('should return h1', function () {
+test('do render', () => {
 
-        var t = `
+    var t = `
 ## a
 
 $$
@@ -66,16 +63,13 @@ A. cc
 
 
  `
-        let s = lram.render(t);
-        console.log(s)
+    let s = lram.render(t);
+    console.log(s)
 
-        let html = htmlTmp.replace('tmp_data', s)
-        writeFile('./tmp/index.html', html, function (err) {
-            if (err) {
-                throw err;
-            }
-        })
-
-
-    });
+    let html = htmlTmp.replace('tmp_data', s)
+    writeFile('./tmp/index.html', html, function (err) {
+        if (err) {
+            throw err;
+        }
+    })
 })
